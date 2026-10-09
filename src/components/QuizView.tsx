@@ -155,17 +155,17 @@ export const QuizView: React.FC<QuizViewProps> = ({
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-50 dark:bg-slate-950">
+    <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-[#cbeeee] dark:bg-slate-950">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Navigation Tabs between Create, Active Test, History */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-800">
+        <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[#b2e8e4] dark:border-slate-800">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActiveTab('create')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+              className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all shadow-xs ${
                 activeTab === 'create'
-                  ? 'bg-indigo-600 text-white shadow-xs'
-                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800'
+                  ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white shadow-[#f4624b]/20'
+                  : 'bg-white/90 dark:bg-slate-900 text-[#1b4356] dark:text-slate-400 border border-[#b2e8e4] dark:border-slate-800'
               }`}
             >
               Generate New Quiz
@@ -174,10 +174,10 @@ export const QuizView: React.FC<QuizViewProps> = ({
             {activeQuiz && (
               <button
                 onClick={() => setActiveTab('take')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-xs ${
                   activeTab === 'take'
-                    ? 'bg-indigo-600 text-white shadow-xs'
-                    : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800'
+                    ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white shadow-[#f4624b]/20'
+                    : 'bg-white/90 dark:bg-slate-900 text-[#1b4356] dark:text-slate-400 border border-[#b2e8e4] dark:border-slate-800'
                 }`}
               >
                 <span>Active Quiz</span>
@@ -187,10 +187,10 @@ export const QuizView: React.FC<QuizViewProps> = ({
 
             <button
               onClick={() => setActiveTab('history')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-xs ${
                 activeTab === 'history'
-                  ? 'bg-indigo-600 text-white shadow-xs'
-                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800'
+                  ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white shadow-[#f4624b]/20'
+                  : 'bg-white/90 dark:bg-slate-900 text-[#1b4356] dark:text-slate-400 border border-[#b2e8e4] dark:border-slate-800'
               }`}
             >
               <History className="w-3.5 h-3.5" />
@@ -210,25 +210,25 @@ export const QuizView: React.FC<QuizViewProps> = ({
         {activeTab === 'create' && (
           <div className="space-y-8">
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-violet-50 dark:bg-violet-950/70 text-violet-700 dark:text-violet-300 border border-violet-200/60 dark:border-violet-800/60 mb-1">
-                <HelpCircle className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-white/80 dark:bg-violet-950/70 text-[#1b4356] dark:text-violet-300 border border-[#b2e8e4] dark:border-violet-800/60 mb-1 shadow-2xs">
+                <HelpCircle className="w-3.5 h-3.5 text-[#ff765e]" />
                 <span>AI Automated Assessment Engine</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-black text-[#1b4356] dark:text-white tracking-tight">
                 AI Quiz Generator
               </h2>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+              <p className="text-sm text-[#517c8d] dark:text-slate-400 font-medium">
                 Generate dynamic, calibrated practice tests from any topic or uploaded study material. Features instant scoring and LLM evaluation for short-answer questions.
               </p>
             </div>
 
             <form
               onSubmit={handleGenerate}
-              className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6"
+              className="bg-white/95 dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-[#b2e8e4] dark:border-slate-800 shadow-sm space-y-6"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#1b4356] dark:text-slate-300 mb-2">
                     Topic to Test
                   </label>
                   <input
@@ -236,18 +236,18 @@ export const QuizView: React.FC<QuizViewProps> = ({
                     value={topic}
                     onChange={e => setTopic(e.target.value)}
                     placeholder="e.g. Distributed Systems, Calculus, Microeconomics..."
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-4 py-3.5 bg-[#f2fbfa] dark:bg-slate-800 border-2 border-[#b2e8e4] focus:border-[#ff765e] rounded-2xl text-xs sm:text-sm text-[#1b4356] dark:text-white focus:outline-none focus:ring-4 focus:ring-[#ff765e]/15 transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#1b4356] dark:text-slate-300 mb-2">
                     Or Ground in Uploaded Document
                   </label>
                   <select
                     value={selectedDocId}
                     onChange={e => setSelectedDocId(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-4 py-3.5 bg-[#f2fbfa] dark:bg-slate-800 border-2 border-[#b2e8e4] focus:border-[#ff765e] rounded-2xl text-xs sm:text-sm text-[#1b4356] dark:text-white focus:outline-none focus:ring-4 focus:ring-[#ff765e]/15 transition"
                   >
                     <option value="">None (Use topic only)</option>
                     {documents.map(d => (
@@ -262,13 +262,13 @@ export const QuizView: React.FC<QuizViewProps> = ({
               {/* Settings row */}
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  <label className="block text-xs font-bold text-[#1b4356] dark:text-slate-300 mb-1.5">
                     Difficulty
                   </label>
                   <select
                     value={difficulty}
                     onChange={e => setDifficulty(e.target.value as any)}
-                    className="w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
+                    className="w-full px-3 py-2.5 bg-[#f2fbfa] dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs font-bold text-[#1b4356] dark:text-slate-200 focus:outline-none"
                   >
                     <option value="easy">Easy (Fundamentals)</option>
                     <option value="medium">Medium (Standard Exam)</option>
@@ -277,13 +277,13 @@ export const QuizView: React.FC<QuizViewProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  <label className="block text-xs font-bold text-[#1b4356] dark:text-slate-300 mb-1.5">
                     Question Type
                   </label>
                   <select
                     value={questionType}
                     onChange={e => setQuestionType(e.target.value as any)}
-                    className="w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
+                    className="w-full px-3 py-2.5 bg-[#f2fbfa] dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs font-bold text-[#1b4356] dark:text-slate-200 focus:outline-none"
                   >
                     <option value="mixed">Mixed (MCQ + Short Answer)</option>
                     <option value="mcq">Multiple Choice (MCQ)</option>
@@ -293,13 +293,13 @@ export const QuizView: React.FC<QuizViewProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  <label className="block text-xs font-bold text-[#1b4356] dark:text-slate-300 mb-1.5">
                     Questions Count
                   </label>
                   <select
                     value={count}
                     onChange={e => setCount(Number(e.target.value))}
-                    className="w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
+                    className="w-full px-3 py-2.5 bg-[#f2fbfa] dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs font-bold text-[#1b4356] dark:text-slate-200 focus:outline-none"
                   >
                     <option value={3}>3 Questions (Quick check)</option>
                     <option value={5}>5 Questions (Standard)</option>
@@ -308,13 +308,13 @@ export const QuizView: React.FC<QuizViewProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  <label className="block text-xs font-bold text-[#1b4356] dark:text-slate-300 mb-1.5">
                     Time Limit
                   </label>
                   <select
                     value={timeLimit}
                     onChange={e => setTimeLimit(Number(e.target.value))}
-                    className="w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
+                    className="w-full px-3 py-2.5 bg-[#f2fbfa] dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs font-bold text-[#1b4356] dark:text-slate-200 focus:outline-none"
                   >
                     <option value={5}>5 Minutes</option>
                     <option value={10}>10 Minutes</option>
@@ -328,13 +328,13 @@ export const QuizView: React.FC<QuizViewProps> = ({
                 <button
                   type="submit"
                   disabled={isGenerating || (!topic.trim() && !selectedDocId)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-semibold text-sm transition shadow-sm ${
+                  className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm transition-all shadow-md ${
                     isGenerating || (!topic.trim() && !selectedDocId)
-                      ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
-                      : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-500/20'
+                      ? 'bg-[#ccefe8] text-[#517c8d]/60 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#f8674f] hover:to-[#e65239] text-white shadow-[#f4624b]/25 hover:scale-105'
                   }`}
                 >
-                  <Sparkles className="w-4 h-4" />
+                  <Sparkles className="w-4 h-4 stroke-[2.5]" />
                   <span>{isGenerating ? 'Generating Diagnostic Questions...' : 'Generate and Start Quiz'}</span>
                 </button>
               </div>
@@ -343,32 +343,32 @@ export const QuizView: React.FC<QuizViewProps> = ({
             {/* List of previously generated quizzes */}
             {quizzes.length > 0 && (
               <div className="space-y-4">
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+                <h3 className="text-sm font-bold text-[#1b4356] dark:text-white uppercase tracking-wider">
                   Available Quizzes ({quizzes.length})
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   {quizzes.map(q => (
                     <div
                       key={q.id}
-                      className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 hover:border-indigo-400 transition flex flex-col justify-between shadow-2xs"
+                      className="bg-white/95 dark:bg-slate-900 rounded-3xl p-5 border border-[#b2e8e4] dark:border-slate-800 hover:border-[#ff765e] transition flex flex-col justify-between shadow-2xs"
                     >
                       <div>
                         <div className="flex items-start justify-between gap-2 mb-2">
-                          <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                          <h4 className="text-sm font-bold text-[#1b4356] dark:text-white">
                             {q.title}
                           </h4>
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded capitalize bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
+                          <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full capitalize bg-[#daf4f1] text-[#1b4356]">
                             {q.difficulty}
                           </span>
                         </div>
-                        <p className="text-xs text-slate-500 mb-3">
+                        <p className="text-xs text-[#517c8d] mb-3 font-medium">
                           {q.questions.length} Questions • {q.timeLimitMinutes ? `${q.timeLimitMinutes} min limit` : 'Untimed'}
                         </p>
                       </div>
 
                       <button
                         onClick={() => startTakingQuiz(q)}
-                        className="flex items-center justify-center gap-1.5 w-full py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white transition"
+                        className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-2xl text-xs font-bold bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#f8674f] hover:to-[#e65239] text-white transition shadow-sm"
                       >
                         <Play className="w-3.5 h-3.5 fill-current" />
                         <span>Take This Quiz</span>
@@ -386,14 +386,14 @@ export const QuizView: React.FC<QuizViewProps> = ({
           <div className="space-y-6">
             {!submissionResult ? (
               // Quiz in progress
-              <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-md space-y-6">
+              <div className="bg-white/95 dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-[#b2e8e4] dark:border-slate-800 shadow-md space-y-6">
                 {/* Header info */}
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+                <div className="flex items-center justify-between pb-4 border-b border-[#b2e8e4]">
                   <div>
-                    <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                    <h3 className="text-base sm:text-lg font-bold text-[#1b4356] dark:text-white">
                       {activeQuiz.title}
                     </h3>
-                    <span className="text-xs text-slate-500">
+                    <span className="text-xs text-[#517c8d]">
                       Question {currentQuestionIndex + 1} of {activeQuiz.questions.length} • Difficulty: {activeQuiz.difficulty}
                     </span>
                   </div>
@@ -402,12 +402,12 @@ export const QuizView: React.FC<QuizViewProps> = ({
                     {activeQuiz.questions.map((_, idx) => (
                       <div
                         key={idx}
-                        className={`w-3 h-3 rounded-full transition ${
+                        className={`w-3.5 h-3.5 rounded-full transition-all ${
                           idx === currentQuestionIndex
-                            ? 'bg-indigo-600 scale-125 ring-2 ring-indigo-400'
+                            ? 'bg-[#ff765e] scale-125 ring-2 ring-[#ff765e]/40'
                             : userAnswers[activeQuiz.questions[idx].id]
-                            ? 'bg-emerald-500'
-                            : 'bg-slate-200 dark:bg-slate-700'
+                            ? 'bg-[#38b2ac]'
+                            : 'bg-[#d0f1ee]'
                         }`}
                       />
                     ))}
@@ -421,7 +421,7 @@ export const QuizView: React.FC<QuizViewProps> = ({
 
                   return (
                     <div className="space-y-5">
-                      <div className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white leading-relaxed">
+                      <div className="text-sm sm:text-base font-bold text-[#1b4356] dark:text-white leading-relaxed">
                         {q.question}
                       </div>
 
@@ -433,10 +433,10 @@ export const QuizView: React.FC<QuizViewProps> = ({
                             return (
                               <label
                                 key={oIdx}
-                                className={`flex items-start gap-3 p-3.5 rounded-2xl border text-xs sm:text-sm cursor-pointer transition ${
+                                className={`flex items-start gap-3 p-3.5 rounded-2xl border text-xs sm:text-sm cursor-pointer transition-all ${
                                   isSelected
-                                    ? 'bg-indigo-50/70 dark:bg-indigo-950/60 border-indigo-600 text-indigo-950 dark:text-indigo-100 font-medium'
-                                    : 'bg-slate-50/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700/80 text-slate-800 dark:text-slate-200 hover:border-slate-300'
+                                    ? 'bg-[#dff5f2] dark:bg-sky-950/60 border-2 border-[#ff765e] text-[#1b4356] font-bold shadow-xs'
+                                    : 'bg-[#f4fbfb] dark:bg-slate-800/50 border border-[#b2e8e4] text-[#1b4356] hover:border-[#ff765e]/50'
                                 }`}
                               >
                                 <input
@@ -444,7 +444,7 @@ export const QuizView: React.FC<QuizViewProps> = ({
                                   name={`q-${q.id}`}
                                   checked={isSelected}
                                   onChange={() => handleAnswerChange(q.id, opt)}
-                                  className="mt-0.5 text-indigo-600 focus:ring-indigo-500"
+                                  className="mt-0.5 text-[#ff765e] focus:ring-[#ff765e]"
                                 />
                                 <span>{opt}</span>
                               </label>
@@ -454,7 +454,7 @@ export const QuizView: React.FC<QuizViewProps> = ({
                       ) : (
                         // Short answer textarea
                         <div>
-                          <label className="block text-xs font-semibold text-slate-500 mb-1.5">
+                          <label className="block text-xs font-bold text-[#517c8d] mb-1.5">
                             Your Explanation / Answer (evaluated by AI):
                           </label>
                           <textarea
@@ -462,18 +462,18 @@ export const QuizView: React.FC<QuizViewProps> = ({
                             onChange={e => handleAnswerChange(q.id, e.target.value)}
                             placeholder="Write your explanation here..."
                             rows={4}
-                            className="w-full p-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="w-full p-3.5 bg-[#f2fbfa] dark:bg-slate-800 border-2 border-[#b2e8e4] focus:border-[#ff765e] rounded-2xl text-xs sm:text-sm text-[#1b4356] dark:text-white focus:outline-none focus:ring-4 focus:ring-[#ff765e]/15"
                           />
                         </div>
                       )}
 
                       {/* Navigation buttons */}
-                      <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
+                      <div className="flex items-center justify-between pt-4 border-t border-[#b2e8e4]">
                         <button
                           type="button"
                           disabled={currentQuestionIndex === 0}
                           onClick={() => setCurrentQuestionIndex(prev => Math.max(prev - 1, 0))}
-                          className="flex items-center gap-1 px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 disabled:opacity-40"
+                          className="flex items-center gap-1 px-4 py-2 rounded-xl text-xs font-bold bg-[#daf4f1] text-[#1b4356] disabled:opacity-40 border border-[#b2e8e4]"
                         >
                           <ChevronLeft className="w-4 h-4" />
                           <span>Previous</span>
@@ -483,7 +483,7 @@ export const QuizView: React.FC<QuizViewProps> = ({
                           <button
                             type="button"
                             onClick={() => setCurrentQuestionIndex(prev => prev + 1)}
-                            className="flex items-center gap-1 px-5 py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs"
+                            className="flex items-center gap-1 px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white shadow-sm hover:scale-105"
                           >
                             <span>Next Question</span>
                             <ChevronRight className="w-4 h-4" />
@@ -493,7 +493,7 @@ export const QuizView: React.FC<QuizViewProps> = ({
                             type="button"
                             disabled={isSubmitting}
                             onClick={handleSubmitQuiz}
-                            className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/20"
+                            className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#f8674f] hover:to-[#e65239] text-white shadow-md shadow-[#f4624b]/20"
                           >
                             <CheckCircle2 className="w-4 h-4" />
                             <span>{isSubmitting ? 'Evaluating with AI...' : 'Submit Answers & Grade'}</span>
@@ -506,16 +506,16 @@ export const QuizView: React.FC<QuizViewProps> = ({
               </div>
             ) : (
               // Quiz Results View
-              <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-md space-y-8">
+              <div className="bg-white/95 dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-[#b2e8e4] dark:border-slate-800 shadow-md space-y-8">
                 {/* Score banner */}
-                <div className="text-center space-y-3 pb-6 border-b border-slate-100 dark:border-slate-800">
-                  <div className="inline-flex p-4 rounded-3xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
+                <div className="text-center space-y-3 pb-6 border-b border-[#b2e8e4]">
+                  <div className="inline-flex p-4 rounded-3xl bg-[#daf4f1] text-[#ff765e] border border-[#b2e8e4] shadow-xs">
                     <Award className="w-10 h-10" />
                   </div>
-                  <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white">
+                  <h3 className="text-2xl font-black text-[#1b4356] dark:text-white">
                     Score: {submissionResult.attempt.score} / {submissionResult.attempt.maxScore} ({submissionResult.attempt.percentage}%)
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto">
+                  <p className="text-xs sm:text-sm text-[#517c8d] max-w-md mx-auto font-medium">
                     {submissionResult.attempt.percentage >= 80
                       ? 'Outstanding mastery of the material! You demonstrate strong academic understanding.'
                       : submissionResult.attempt.percentage >= 60
@@ -526,14 +526,14 @@ export const QuizView: React.FC<QuizViewProps> = ({
                   <div className="flex items-center justify-center gap-3 pt-2">
                     <button
                       onClick={() => startTakingQuiz(activeQuiz)}
-                      className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white"
+                      className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white shadow-xs"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       <span>Retake Quiz</span>
                     </button>
                     <button
                       onClick={() => setActiveTab('create')}
-                      className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+                      className="px-4 py-2 rounded-xl text-xs font-bold bg-[#daf4f1] text-[#1b4356] border border-[#b2e8e4]"
                     >
                       New Topic
                     </button>

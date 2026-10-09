@@ -109,7 +109,6 @@ Generate 2 concise, encouraging, and highly specific next-step study suggestions
         contents: prompt,
         config: {
           systemInstruction: 'You are StudySphere Learning Analytics. Be constructive and specific.',
-          thinkingConfig: { thinkingLevel: ThinkingLevel.MINIMAL },
         },
       });
       aiRecommendation = aiResp.text?.trim() || aiRecommendation;

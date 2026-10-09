@@ -127,18 +127,18 @@ Requirements:
   ];
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-sky-50/20 dark:bg-slate-950">
+    <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-[#cbeeee] dark:bg-slate-950">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Header */}
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 border border-sky-200/60 dark:border-sky-800/60">
-            <BookMarked className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-white/80 dark:bg-sky-950/70 text-[#1b4356] dark:text-sky-300 border border-[#b2e8e4] dark:border-sky-800/60 shadow-2xs">
+            <BookMarked className="w-3.5 h-3.5 text-[#ff765e]" />
             <span>Dedicated Structured Learning Studio</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-black text-[#1b4356] dark:text-white tracking-tight">
             Personalized Learning Mode
           </h2>
-          <p className="text-sm text-slate-600 dark:text-slate-400">
+          <p className="text-sm text-[#517c8d] dark:text-slate-400 font-medium">
             Tailor high-fidelity academic lessons adapted to your current skill level, study timeframe, and pedagogical goals.
           </p>
         </div>
@@ -152,30 +152,30 @@ Requirements:
               <button
                 key={m.id}
                 onClick={() => setActiveMode(m.id as any)}
-                className={`p-3 rounded-2xl border text-left transition-all ${
+                className={`p-3.5 rounded-3xl border text-left transition-all ${
                   isSelected
-                    ? 'bg-white dark:bg-slate-900 border-sky-500 shadow-md ring-2 ring-sky-500/20'
-                    : 'bg-white/60 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-sky-300 dark:hover:border-slate-700'
+                    ? 'bg-white dark:bg-slate-900 border-[#ff765e] shadow-md ring-2 ring-[#ff765e]/25'
+                    : 'bg-white/85 dark:bg-slate-900/60 border-[#b2e8e4] dark:border-slate-800 hover:border-[#ff765e]/60 hover:bg-white'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
                   <div
-                    className={`p-2 rounded-xl ${
+                    className={`p-2 rounded-2xl ${
                       isSelected
-                        ? 'bg-sky-600 text-white'
-                        : 'bg-sky-50 dark:bg-slate-800 text-sky-700 dark:text-slate-400'
+                        ? 'bg-gradient-to-tr from-[#ff765e] to-[#f4624b] text-white shadow-xs'
+                        : 'bg-[#daf4f1] dark:bg-slate-800 text-[#1b4356] dark:text-slate-400'
                     }`}
                   >
                     <Icon className="w-4 h-4" />
                   </div>
-                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-500">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider bg-[#d0f2ee] dark:bg-slate-800 text-[#1b4356]">
                     {m.badge}
                   </span>
                 </div>
-                <h4 className="text-xs font-bold text-slate-900 dark:text-white leading-tight">
+                <h4 className="text-xs font-bold text-[#1b4356] dark:text-white leading-tight">
                   {m.title}
                 </h4>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                <p className="text-[11px] text-[#517c8d] dark:text-slate-400 mt-1 line-clamp-2">
                   {m.subtitle}
                 </p>
               </button>
@@ -184,10 +184,10 @@ Requirements:
         </div>
 
         {/* Configuration Card */}
-        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800/80 shadow-xs space-y-6">
+        <div className="bg-white/95 dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-[#b2e8e4] dark:border-slate-800/80 shadow-sm space-y-6">
           <form onSubmit={handleGenerateLesson} className="space-y-5">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#1b4356] dark:text-slate-300 mb-2">
                 What Subject or Topic do you want to learn?
               </label>
               <input
@@ -195,18 +195,18 @@ Requirements:
                 value={topic}
                 onChange={e => setTopic(e.target.value)}
                 placeholder="e.g. Backpropagation, Quantum Computing, Microeconomics, Calculus Integrals..."
-                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-2xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3.5 bg-[#f2fbfa] dark:bg-slate-800/90 border-2 border-[#b2e8e4] focus:border-[#ff765e] rounded-2xl text-sm text-[#1b4356] dark:text-white placeholder:text-[#517c8d]/60 focus:outline-none focus:ring-4 focus:ring-[#ff765e]/15 transition"
               />
 
               {/* Sample Topic Chips */}
               <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
-                <span className="text-[11px] text-slate-400 mr-1">Popular:</span>
+                <span className="text-[11px] font-bold text-[#517c8d] mr-1">Popular:</span>
                 {sampleTopics.map(t => (
                   <button
                     key={t}
                     type="button"
                     onClick={() => setTopic(t)}
-                    className="text-[11px] px-2.5 py-1 rounded-lg bg-sky-50 dark:bg-slate-800 text-sky-800 dark:text-slate-300 hover:bg-sky-100 hover:text-sky-700 dark:hover:bg-slate-700 transition"
+                    className="text-[11px] font-semibold px-2.5 py-1 rounded-xl bg-[#daf4f1] dark:bg-slate-800 text-[#1b4356] dark:text-slate-300 hover:bg-[#c6eee9] hover:text-[#1b4356] border border-[#b2e8e4] transition"
                   >
                     {t}
                   </button>
@@ -217,13 +217,13 @@ Requirements:
             {/* Controls row */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                <label className="block text-xs font-bold text-[#1b4356] dark:text-slate-300 mb-1.5">
                   Knowledge Level
                 </label>
                 <select
                   value={level}
                   onChange={e => setLevel(e.target.value as any)}
-                  className="w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  className="w-full px-3 py-2.5 bg-[#f2fbfa] dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs font-bold text-[#1b4356] dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#ff765e]/30"
                 >
                   <option value="Beginner">Beginner (Foundations & Basics)</option>
                   <option value="Intermediate">Intermediate (Core Concepts & Mechanics)</option>
@@ -232,13 +232,13 @@ Requirements:
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                <label className="block text-xs font-bold text-[#1b4356] dark:text-slate-300 mb-1.5">
                   Available Study Time
                 </label>
                 <select
                   value={studyTime}
                   onChange={e => setStudyTime(e.target.value)}
-                  className="w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  className="w-full px-3 py-2.5 bg-[#f2fbfa] dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs font-bold text-[#1b4356] dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#ff765e]/30"
                 >
                   <option value="15 minutes">15 minutes (Quick Sprint)</option>
                   <option value="30 minutes">30 minutes (Standard Focus)</option>
@@ -248,7 +248,7 @@ Requirements:
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                <label className="block text-xs font-bold text-[#1b4356] dark:text-slate-300 mb-1.5">
                   Primary Learning Goal
                 </label>
                 <input
@@ -256,7 +256,7 @@ Requirements:
                   value={goal}
                   onChange={e => setGoal(e.target.value)}
                   placeholder="e.g. Exam prep, interview, project"
-                  className="w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                  className="w-full px-3 py-2.5 bg-[#f2fbfa] dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs font-medium text-[#1b4356] dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#ff765e]/30"
                 />
               </div>
             </div>
@@ -265,13 +265,13 @@ Requirements:
               <button
                 type="submit"
                 disabled={isLoading || !topic.trim()}
-                className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-semibold text-sm transition shadow-sm ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm transition-all shadow-md ${
                   isLoading || !topic.trim()
-                    ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
-                    : 'bg-sky-600 hover:bg-sky-700 text-white shadow-sky-500/20'
+                    ? 'bg-[#ccefe8] text-[#517c8d]/60 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#f8674f] hover:to-[#e65239] text-white shadow-[#f4624b]/25 hover:scale-105'
                 }`}
               >
-                <Sparkles className="w-4 h-4" />
+                <Sparkles className="w-4 h-4 stroke-[2.5]" />
                 <span>{isLoading ? 'Synthesizing Lesson...' : 'Generate Learning Experience'}</span>
               </button>
             </div>
@@ -293,17 +293,17 @@ Requirements:
 
         {/* Generated Lesson Content */}
         {generatedLesson && !isLoading && (
-          <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800/80 shadow-md space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
+          <div className="bg-white/95 dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-[#b2e8e4] dark:border-slate-800/80 shadow-md space-y-6">
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#b2e8e4]">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
+                <div className="p-2 rounded-2xl bg-[#daf4f1] text-[#ff765e] border border-[#b2e8e4]">
                   <BookOpen className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                  <h3 className="text-base sm:text-lg font-bold text-[#1b4356] dark:text-white">
                     {topic}
                   </h3>
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-[#517c8d]">
                     Mode: {modes.find(m => m.id === activeMode)?.title} • Level: {level}
                   </span>
                 </div>
@@ -312,10 +312,10 @@ Requirements:
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setIsCompleted(!isCompleted)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition ${
                     isCompleted
                       ? 'bg-emerald-600 text-white shadow-xs'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
+                      : 'bg-[#daf4f1] text-[#1b4356] hover:bg-[#cbf0ea] border border-[#b2e8e4]'
                   }`}
                 >
                   <Check className="w-3.5 h-3.5" />
@@ -324,26 +324,26 @@ Requirements:
 
                 <button
                   onClick={() => onStartQuizOnTopic(topic)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-sky-50 dark:bg-sky-950 text-sky-700 dark:text-sky-300 hover:bg-sky-100 transition"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-[#daf4f1] text-[#1b4356] hover:bg-[#cbf0ea] border border-[#b2e8e4] transition"
                 >
-                  <HelpCircle className="w-3.5 h-3.5" />
+                  <HelpCircle className="w-3.5 h-3.5 text-[#ff765e]" />
                   <span>Take Quiz On This</span>
                 </button>
               </div>
             </div>
 
             {/* Markdown Lesson Content */}
-            <div className="pt-2">
+            <div className="pt-2 text-[#1b4356]">
               <MarkdownRenderer content={generatedLesson} />
             </div>
 
             {/* Footer Next Steps */}
-            <div className="mt-8 pt-5 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 bg-sky-50/50 dark:bg-slate-800/40 p-4 rounded-2xl border border-sky-100 dark:border-slate-800">
+            <div className="mt-8 pt-5 border-t border-[#b2e8e4] flex flex-wrap items-center justify-between gap-3 bg-[#e2f7f5]/80 dark:bg-slate-800/40 p-4 rounded-2xl border border-[#b2e8e4] dark:border-slate-800">
               <div>
-                <h4 className="text-xs font-bold text-slate-900 dark:text-white">
+                <h4 className="text-xs font-bold text-[#1b4356] dark:text-white">
                   Have doubts about this topic?
                 </h4>
-                <p className="text-[11px] text-slate-500">
+                <p className="text-[11px] text-[#517c8d]">
                   Continue this lesson with conversational multi-turn AI in StudySphere Chat.
                 </p>
               </div>
@@ -354,10 +354,10 @@ Requirements:
                     activeMode
                   )
                 }
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-sky-600 hover:bg-sky-700 text-white transition shadow-xs"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white transition shadow-sm hover:scale-105"
               >
                 <span>Continue Discussion in Chat</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
               </button>
             </div>
           </div>

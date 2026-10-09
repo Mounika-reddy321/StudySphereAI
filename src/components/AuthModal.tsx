@@ -56,21 +56,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-2xl relative">
+    <div className="fixed inset-0 z-50 bg-[#1b4356]/50 backdrop-blur-xs flex items-center justify-center p-4">
+      <div className="bg-[#e4f8f6] dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-7 border border-[#b2e8e4] dark:border-slate-800 shadow-2xl relative">
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+          className="absolute right-4 top-4 p-1.5 text-[#4d7a8d] hover:text-[#1b4356] dark:hover:text-slate-200 rounded-lg hover:bg-[#daf4f1] dark:hover:bg-slate-800 transition"
         >
           <X className="w-4 h-4" />
         </button>
 
         <div className="text-center space-y-2 mb-6">
           <Logo size={40} className="justify-center" />
-          <h3 className="text-xl font-extrabold text-slate-900 dark:text-white pt-2">
+          <h3 className="text-xl font-extrabold text-[#1b4356] dark:text-white pt-2">
             {mode === 'login' ? 'Welcome Back to StudySphere' : 'Create Your StudySphere Account'}
           </h3>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-[#4d7a8d]">
             {mode === 'login'
               ? 'Sign in to access your chat history, indexed study documents, and memories.'
               : 'Start your personalized AI-driven learning journey.'}
@@ -78,7 +78,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
         </div>
 
         {/* Tab switch */}
-        <div className="flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1 mb-5">
+        <div className="flex rounded-xl bg-white/70 dark:bg-slate-800 p-1 mb-5 border border-[#b2e8e4]/60">
           <button
             type="button"
             onClick={() => {
@@ -87,8 +87,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
             }}
             className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition ${
               mode === 'login'
-                ? 'bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs'
-                : 'text-slate-600 dark:text-slate-400'
+                ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white shadow-xs'
+                : 'text-[#4d7a8d] hover:text-[#1b4356]'
             }`}
           >
             Sign In
@@ -101,8 +101,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
             }}
             className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition ${
               mode === 'register'
-                ? 'bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs'
-                : 'text-slate-600 dark:text-slate-400'
+                ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white shadow-xs'
+                : 'text-[#4d7a8d] hover:text-[#1b4356]'
             }`}
           >
             Create Account
@@ -119,66 +119,66 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
         <form onSubmit={handleSubmit} className="space-y-3.5">
           {mode === 'register' && (
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-[#1b4356] dark:text-slate-300 mb-1">
                 Full Name
               </label>
               <div className="relative">
-                <UserIcon className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                <UserIcon className="w-4 h-4 text-[#4d7a8d] absolute left-3 top-2.5" />
                 <input
                   type="text"
                   value={name}
                   onChange={e => setName(e.target.value)}
                   placeholder="e.g. Alex Rivera"
                   required
-                  className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                  className="w-full pl-9 pr-3 py-2 bg-white dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs text-[#1b4356] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#ff765e]"
                 />
               </div>
             </div>
           )}
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#1b4356] dark:text-slate-300 mb-1">
               Email Address
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+              <Mail className="w-4 h-4 text-[#4d7a8d] absolute left-3 top-2.5" />
               <input
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="student@example.com"
                 required
-                className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full pl-9 pr-3 py-2 bg-white dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs text-[#1b4356] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#ff765e]"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#1b4356] dark:text-slate-300 mb-1">
               Password
             </label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+              <Lock className="w-4 h-4 text-[#4d7a8d] absolute left-3 top-2.5" />
               <input
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full pl-9 pr-3 py-2 bg-white dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs text-[#1b4356] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#ff765e]"
               />
             </div>
           </div>
 
           {mode === 'register' && (
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-[#1b4356] dark:text-slate-300 mb-1">
                 Preferred Language
               </label>
               <select
                 value={language}
                 onChange={e => setLanguage(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white focus:outline-none"
+                className="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs text-[#1b4356] dark:text-white focus:outline-none"
               >
                 <option value="English">English</option>
                 <option value="Telugu">తెలుగు (Telugu)</option>
@@ -191,7 +191,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-2.5 rounded-xl font-bold text-xs bg-indigo-600 hover:bg-indigo-700 text-white transition shadow-sm shadow-indigo-500/20 disabled:opacity-50"
+            className="w-full py-2.5 rounded-xl font-bold text-xs bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#ff856f] hover:to-[#f87158] text-white transition shadow-sm disabled:opacity-50"
           >
             {isLoading
               ? 'Authenticating...'
@@ -202,11 +202,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
         </form>
 
         {/* Demo Fast Login Shortcut */}
-        <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
+        <div className="mt-5 pt-4 border-t border-[#b2e8e4]/80 dark:border-slate-800 text-center">
           <button
             type="button"
             onClick={handleFillDemo}
-            className="text-xs text-indigo-600 dark:text-indigo-400 font-semibold hover:underline"
+            className="text-xs text-[#1b4356] dark:text-sky-400 font-bold hover:underline"
           >
             ⚡ Click here to autofill Demo Student account
           </button>

@@ -197,7 +197,6 @@ chatRouter.post('/chat', requireAuth, async (req: AuthenticatedRequest, res: Res
       contents,
       config: {
         systemInstruction,
-        thinkingConfig: { thinkingLevel: ThinkingLevel.MINIMAL },
         temperature: 0.7,
       },
     });
@@ -356,19 +355,23 @@ chatRouter.post('/chat/stream', requireAuth, async (req: AuthenticatedRequest, r
   });
 
   // Prepare Server-Sent Events headers
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-cache, no-transform');
   res.setHeader('Connection', 'keep-alive');
+  res.setHeader('X-Accel-Buffering', 'no');
   res.flushHeaders?.();
 
   // Send initial event
   res.write(`event: init\ndata: ${JSON.stringify({ conversationId: conv.id, userMessage: userMsg })}\n\n`);
+  if (typeof (res as any).flush === 'function') (res as any).flush();
 
   let fullOutput = '';
   let isClosed = false;
 
-  req.on('close', () => {
-    isClosed = true;
+  res.on('close', () => {
+    if (!res.writableEnded) {
+      isClosed = true;
+    }
   });
 
   try {
@@ -377,7 +380,6 @@ chatRouter.post('/chat/stream', requireAuth, async (req: AuthenticatedRequest, r
       contents,
       config: {
         systemInstruction,
-        thinkingConfig: { thinkingLevel: ThinkingLevel.MINIMAL },
         temperature: 0.7,
       },
     });
@@ -388,6 +390,7 @@ chatRouter.post('/chat/stream', requireAuth, async (req: AuthenticatedRequest, r
       if (text) {
         fullOutput += text;
         res.write(`event: chunk\ndata: ${JSON.stringify({ text })}\n\n`);
+        if (typeof (res as any).flush === 'function') (res as any).flush();
       }
     }
 

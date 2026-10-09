@@ -108,19 +108,19 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-sky-50/20 dark:bg-slate-950">
+    <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-[#cbeeee] dark:bg-slate-950">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Header & Memory Master Toggle */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 border border-sky-200/60 dark:border-sky-800/60 mb-2">
-              <Brain className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/80 dark:bg-sky-950/70 text-[#1b4356] dark:text-sky-300 border border-[#b2e8e4] dark:border-sky-800/60 mb-2 shadow-xs">
+              <Brain className="w-3.5 h-3.5 text-[#ff765e]" />
               <span>User-Controlled Long-Term Memory</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1b4356] dark:text-white tracking-tight">
               StudySphere Memory
             </h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-sm text-[#4d7a8d] dark:text-slate-400">
               Personalized facts, learning preferences, and ongoing study goals that persist across sessions. You have full control to inspect, edit, or purge any item at any time.
             </p>
           </div>
@@ -131,7 +131,7 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold border transition ${
                 memoryEnabled
                   ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-300 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300'
-                  : 'bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-500'
+                  : 'bg-white/80 dark:bg-slate-800 border-[#b2e8e4] dark:border-slate-700 text-slate-500'
               }`}
             >
               {memoryEnabled ? (
@@ -149,7 +149,7 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
 
             <button
               onClick={() => setIsAdding(!isAdding)}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-sky-600 hover:bg-sky-700 text-white transition shadow-sm shadow-sky-500/20"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#ff856f] hover:to-[#f87158] text-white transition shadow-sm"
             >
               <Plus className="w-4 h-4" />
               <span>Add Memory</span>
@@ -158,11 +158,11 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
         </div>
 
         {/* Informational Transparency Card */}
-        <div className="bg-sky-50/60 dark:bg-sky-950/30 rounded-2xl p-4 border border-sky-200/60 dark:border-sky-800/60 flex items-start gap-3">
-          <ShieldCheck className="w-5 h-5 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
-          <div className="text-xs text-sky-900 dark:text-sky-200 space-y-1">
-            <strong className="font-semibold block">Privacy & Transparency Guarantee:</strong>
-            <p>
+        <div className="bg-white/80 dark:bg-sky-950/30 rounded-2xl p-4 border border-[#b2e8e4] dark:border-sky-800/60 flex items-start gap-3 shadow-xs">
+          <ShieldCheck className="w-5 h-5 text-[#ff765e] shrink-0 mt-0.5" />
+          <div className="text-xs text-[#1b4356] dark:text-sky-200 space-y-1">
+            <strong className="font-semibold block text-[#1b4356] dark:text-white">Privacy & Transparency Guarantee:</strong>
+            <p className="text-[#4d7a8d] dark:text-sky-200">
               StudySphere does not secretly record all past conversations as permanent memory. Only memories explicitly saved by you or approved via prompts are stored here. When relevant to a question, relevant memories are injected into the AI context to tailor explanations.
             </p>
           </div>
@@ -172,21 +172,21 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
         {isAdding && (
           <form
             onSubmit={handleAdd}
-            className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-sky-100 dark:border-slate-800 shadow-sm space-y-4"
+            className="bg-white/95 dark:bg-slate-900 rounded-3xl p-5 border border-[#b2e8e4] dark:border-slate-800 shadow-md space-y-4"
           >
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+            <h3 className="text-sm font-bold text-[#1b4356] dark:text-white">
               Save New Personal Learning Note / Preference
             </h3>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-[#1b4356] dark:text-slate-300 mb-1">
                 Fact or Note
               </label>
               <textarea
                 value={newFact}
                 onChange={e => setNewFact(e.target.value)}
                 placeholder="e.g. 'I am studying for AWS Solutions Architect certification in June' or 'I prefer Python code snippets rather than C++'..."
-                className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                className="w-full px-3.5 py-2.5 bg-[#f0faf9] dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs text-[#1b4356] dark:text-white placeholder:text-[#4d7a8d]/60 focus:outline-none focus:ring-2 focus:ring-[#ff765e]"
                 rows={2}
                 required
               />
@@ -194,7 +194,7 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
 
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2">
-                <span className="text-xs text-slate-500">Category:</span>
+                <span className="text-xs text-[#4d7a8d]">Category:</span>
                 {(['preference', 'academic', 'goal', 'general'] as const).map(cat => (
                   <button
                     key={cat}
@@ -202,8 +202,8 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
                     onClick={() => setNewCategory(cat)}
                     className={`text-xs px-2.5 py-1 rounded-lg capitalize font-medium transition ${
                       newCategory === cat
-                        ? 'bg-sky-600 text-white'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+                        ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white'
+                        : 'bg-[#daf4f1] dark:bg-slate-800 text-[#1b4356] dark:text-slate-400'
                     }`}
                   >
                     {cat}
@@ -215,13 +215,13 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsAdding(false)}
-                  className="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="px-3 py-1.5 rounded-lg text-xs font-medium text-[#4d7a8d] hover:bg-[#daf4f1] dark:hover:bg-slate-800"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 hover:bg-sky-700 text-white shadow-xs"
+                  className="px-4 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white shadow-xs"
                 >
                   Save Fact
                 </button>
@@ -233,13 +233,13 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
         {/* Memory Search & Controls */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="relative flex-1 max-w-md">
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+            <Search className="w-3.5 h-3.5 text-[#4d7a8d] absolute left-3 top-2.5" />
             <input
               type="text"
               placeholder="Search stored memories..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full pl-8 pr-3 py-1.5 text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500 text-slate-800 dark:text-slate-200"
+              className="w-full pl-8 pr-3 py-1.5 text-xs bg-white dark:bg-slate-900 border border-[#b2e8e4] dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#ff765e] text-[#1b4356] dark:text-slate-200"
             />
           </div>
 
@@ -257,12 +257,12 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
         {/* Memories List */}
         <div className="space-y-3">
           {filtered.length === 0 ? (
-            <div className="bg-white dark:bg-slate-900 rounded-3xl p-10 border border-slate-200 dark:border-slate-800 text-center space-y-2">
-              <Brain className="w-10 h-10 text-slate-300 dark:text-slate-600 mx-auto" />
-              <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+            <div className="bg-white/95 dark:bg-slate-900 rounded-3xl p-10 border border-[#b2e8e4] dark:border-slate-800 text-center space-y-2 shadow-xs">
+              <Brain className="w-10 h-10 text-[#4d7a8d]/40 mx-auto" />
+              <h4 className="text-sm font-semibold text-[#1b4356] dark:text-slate-300">
                 No memories found
               </h4>
-              <p className="text-xs text-slate-500 max-w-sm mx-auto">
+              <p className="text-xs text-[#4d7a8d] max-w-sm mx-auto">
                 {memories.length === 0
                   ? 'Add your learning goals and study preferences above or approve memory suggestions during AI chats.'
                   : 'No memories matched your search query.'}
@@ -276,14 +276,14 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
               return (
                 <div
                   key={mem.id}
-                  className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200/80 dark:border-slate-800 shadow-2xs hover:border-slate-300 dark:hover:border-slate-700 transition"
+                  className="bg-white/95 dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-[#b2e8e4] dark:border-slate-800 shadow-xs hover:border-[#ff765e]/40 transition"
                 >
                   {isEditing ? (
                     <div className="space-y-3">
                       <textarea
                         value={editFact}
                         onChange={e => setEditFact(e.target.value)}
-                        className="w-full text-xs p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-indigo-500 focus:outline-none text-slate-900 dark:text-white"
+                        className="w-full text-xs p-2.5 rounded-lg bg-[#f0faf9] dark:bg-slate-800 border border-[#ff765e] focus:outline-none text-[#1b4356] dark:text-white"
                         rows={2}
                       />
                       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -295,8 +295,8 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
                               onClick={() => setEditCategory(cat)}
                               className={`text-[10px] px-2 py-0.5 rounded capitalize font-medium ${
                                 editCategory === cat
-                                  ? 'bg-indigo-600 text-white'
-                                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+                                  ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white'
+                                  : 'bg-[#daf4f1] dark:bg-slate-800 text-[#1b4356] dark:text-slate-400'
                               }`}
                             >
                               {cat}
@@ -312,7 +312,7 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
                           </button>
                           <button
                             onClick={() => handleSaveEdit(mem.id)}
-                            className="px-3 py-1 text-xs font-semibold rounded bg-indigo-600 text-white"
+                            className="px-3 py-1 text-xs font-semibold rounded bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white"
                           >
                             Save
                           </button>
@@ -326,11 +326,11 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
                           <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${badge.bg}`}>
                             {badge.label}
                           </span>
-                          <span className="text-[11px] text-slate-400">
+                          <span className="text-[11px] text-[#4d7a8d]">
                             Saved {new Date(mem.createdAt).toLocaleDateString()}
                           </span>
                         </div>
-                        <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal">
+                        <p className="text-xs sm:text-sm text-[#1b4356] dark:text-slate-200 leading-relaxed font-normal">
                           {mem.fact}
                         </p>
                       </div>
@@ -338,14 +338,14 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
                       <div className="flex items-center gap-1 shrink-0 pt-0.5">
                         <button
                           onClick={() => handleStartEdit(mem)}
-                          className="p-1.5 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition"
+                          className="p-1.5 text-[#4d7a8d] hover:text-[#ff765e] rounded-lg hover:bg-[#daf4f1] dark:hover:bg-slate-800 transition"
                           title="Edit"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleDelete(mem.id)}
-                          className="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition"
+                          className="p-1.5 text-[#4d7a8d] hover:text-rose-600 rounded-lg hover:bg-[#daf4f1] dark:hover:bg-slate-800 transition"
                           title="Delete"
                         >
                           <Trash2 className="w-3.5 h-3.5" />

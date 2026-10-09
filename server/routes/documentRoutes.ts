@@ -183,7 +183,6 @@ documentRouter.post('/:id/actions', requireAuth, async (req: AuthenticatedReques
       contents: prompt,
       config: {
         systemInstruction: `You are StudySphere, generating academic study aids for the document titled "${doc.title}". Respond in clear, beautifully formatted Markdown in ${user.preferredLanguage}.`,
-        thinkingConfig: { thinkingLevel: ThinkingLevel.MINIMAL },
       },
     });
 

@@ -91,25 +91,25 @@ export const Header: React.FC<HeaderProps> = ({
   ];
 
   return (
-    <header className="h-16 shrink-0 border-b border-sky-100 dark:border-slate-800 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between z-10 transition-colors">
+    <header className="h-16 shrink-0 border-b border-[#b2e8e4] dark:border-slate-800 bg-[#d8f4f2]/85 dark:bg-slate-900/85 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between z-10 transition-colors">
       <div className="flex items-center gap-3">
         {/* Mobile menu hamburger */}
         <button
           onClick={onOpenMobileSidebar}
-          className="md:hidden p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 rounded-lg hover:bg-sky-50 dark:hover:bg-slate-800 transition"
+          className="md:hidden p-2 text-[#517c8d] hover:text-[#1b4356] dark:text-slate-400 dark:hover:text-slate-200 rounded-xl hover:bg-[#c6ece9] dark:hover:bg-slate-800 transition"
         >
           <Menu className="w-5 h-5" />
         </button>
 
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 hidden sm:flex">
-            <Icon className="w-4 h-4" />
+          <div className="p-2 rounded-xl bg-white/90 dark:bg-slate-800 text-[#1b4356] dark:text-sky-400 border border-[#aee3df] dark:border-slate-700 shadow-2xs hidden sm:flex">
+            <Icon className="w-4 h-4 text-[#ff765e]" />
           </div>
           <div>
-            <h1 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-tight">
+            <h1 className="text-sm sm:text-base font-extrabold text-[#1b4356] dark:text-white leading-tight">
               {currentTabInfo.title}
             </h1>
-            <p className="hidden sm:block text-[11px] text-slate-500 dark:text-slate-400 font-normal">
+            <p className="hidden sm:block text-[11px] text-[#517c8d] dark:text-slate-400 font-medium">
               {currentTabInfo.subtitle}
             </p>
           </div>
@@ -118,12 +118,12 @@ export const Header: React.FC<HeaderProps> = ({
 
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Multilingual Selector */}
-        <div className="relative flex items-center bg-sky-50/70 dark:bg-slate-800 rounded-xl px-2 py-1 border border-sky-200/60 dark:border-slate-700/60">
-          <Globe className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 mr-1.5" />
+        <div className="relative flex items-center bg-white/90 dark:bg-slate-800 rounded-xl px-2.5 py-1.5 border border-[#b2e8e4] dark:border-slate-700 shadow-2xs">
+          <Globe className="w-3.5 h-3.5 text-[#308197] dark:text-sky-400 mr-1.5" />
           <select
             value={selectedLanguage}
             onChange={e => onSelectLanguage(e.target.value)}
-            className="bg-transparent text-xs font-medium text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1"
+            className="bg-transparent text-xs font-semibold text-[#1b4356] dark:text-slate-200 focus:outline-none cursor-pointer pr-1"
           >
             {languages.map(lang => (
               <option key={lang.code} value={lang.code} className="dark:bg-slate-900">
@@ -136,7 +136,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Dark Mode Toggle */}
         <button
           onClick={onToggleDarkMode}
-          className="p-2 text-slate-500 hover:text-sky-700 dark:text-slate-400 dark:hover:text-slate-100 rounded-xl hover:bg-sky-50 dark:hover:bg-slate-800 transition border border-sky-200/60 dark:border-slate-800/80"
+          className="p-2 text-[#517c8d] hover:text-[#1b4356] dark:text-slate-400 dark:hover:text-slate-100 rounded-xl bg-white/80 hover:bg-white dark:bg-slate-800 transition border border-[#b2e8e4] dark:border-slate-700 shadow-2xs"
           title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
         >
           {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
@@ -149,14 +149,14 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex items-center gap-2 pl-1 cursor-pointer group"
             title="Account profile"
           >
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-sky-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-sm group-hover:ring-2 group-hover:ring-sky-400 transition">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#ff765e] to-[#f4624b] flex items-center justify-center text-white text-xs font-bold shadow-sm group-hover:scale-105 transition">
               {currentUser.name.charAt(0).toUpperCase()}
             </div>
           </div>
         ) : (
           <button
             onClick={onOpenAuth}
-            className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-sky-600 hover:bg-sky-700 text-white shadow-sm transition"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#f8674f] hover:to-[#e65239] text-white shadow-sm shadow-[#f4624b]/20 transition"
           >
             Sign In
           </button>

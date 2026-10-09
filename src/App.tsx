@@ -376,7 +376,7 @@ export default function App() {
   };
 
   return (
-    <div className={`h-screen w-screen flex overflow-hidden bg-sky-50/30 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-sky-400 selection:text-white ${darkMode ? 'dark' : ''}`}>
+    <div className={`h-screen w-screen flex overflow-hidden bg-[#cbeeee] dark:bg-slate-950 text-[#1b4356] dark:text-slate-100 font-sans selection:bg-[#ff765e] selection:text-white ${darkMode ? 'dark' : ''}`}>
       {/* Sidebar */}
       <Sidebar
         activeTab={activeTab}

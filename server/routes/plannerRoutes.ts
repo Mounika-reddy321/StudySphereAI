@@ -60,7 +60,6 @@ Return ONLY a valid JSON object matching this schema:
       contents: prompt,
       config: {
         responseMimeType: 'application/json',
-        thinkingConfig: { thinkingLevel: ThinkingLevel.MINIMAL },
       },
     });
 

@@ -2,15 +2,18 @@
 
 @layer base {
   :root {
-    --bg-main: #f0f7ff;
-    --card-bg: #ffffff;
-    --border-soft: #bae6fd;
-    --accent-blue: #0284c7;
+    --bg-skyhop: #cbeeee;
+    --card-skyhop: #ffffff;
+    --border-skyhop: #b2e8e4;
+    --navy-skyhop: #1b4356;
+    --muted-skyhop: #517c8d;
+    --coral-skyhop: #f87158;
+    --coral-hover: #ef6147;
   }
 
   body {
-    background-color: #f0f7ff;
-    color: #0f172a;
+    background-color: #cbeeee;
+    color: #1b4356;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   }
   
@@ -19,7 +22,7 @@
   }
 }
 
-/* Light blue custom delicate scrollbars */
+/* Custom delicate scrollbars with matching pastel light blue */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -30,18 +33,41 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #bae6fd;
+  background: #a6e3df;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
+  background: #89d8d3;
 }
 
-/* Light Blue Subtle Background Tint */
-.theme-light-blue-bg {
-  background-color: #f0f7ff;
+/* Skyhop Pastel Theme Helpers */
+.skyhop-bg-gradient {
+  background-color: #cbeeee;
   background-image: 
-    radial-gradient(at 0% 0%, rgba(186, 230, 253, 0.35) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(224, 242, 254, 0.45) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(226, 248, 247, 0.9) 0px, transparent 55%),
+    radial-gradient(at 100% 100%, rgba(188, 237, 233, 0.8) 0px, transparent 60%);
+}
+
+.skyhop-glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(178, 232, 228, 0.85);
+}
+
+.skyhop-btn-coral {
+  background: linear-gradient(135deg, #ff765e 0%, #f4624b 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px 0 rgba(244, 98, 75, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skyhop-btn-coral:hover {
+  background: linear-gradient(135deg, #f8674f 0%, #e65239 100%);
+  box-shadow: 0 6px 18px 0 rgba(244, 98, 75, 0.45);
+  transform: translateY(-1px);
+}
+
+.skyhop-btn-coral:active {
+  transform: translateY(0);
 }

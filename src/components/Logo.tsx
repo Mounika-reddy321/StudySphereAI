@@ -10,7 +10,7 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 36, showText 
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
       <div
-        className="relative flex items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 via-blue-600 to-cyan-500 shadow-md shadow-sky-500/20 text-white shrink-0"
+        className="relative flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff765e] via-[#f87158] to-[#f4624b] shadow-md shadow-[#ff765e]/25 text-white shrink-0"
         style={{ width: size, height: size }}
       >
         <svg
@@ -45,41 +45,41 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 36, showText 
           <path
             d="M24 28C20 25 14 25 11 26.5V14.5C14 13 20 13 24 16C28 13 34 13 37 14.5V26.5C34 25 28 25 24 28Z"
             fill="currentColor"
-            fillOpacity="0.85"
+            fillOpacity="0.9"
           />
           <path
             d="M24 16V28"
-            stroke="#1e1b4b"
+            stroke="#1b4356"
             strokeWidth="1.5"
             strokeLinecap="round"
           />
 
           {/* Neural AI Nodes */}
-          <circle cx="24" cy="11" r="2.5" fill="#a5b4fc" />
-          <circle cx="12" cy="20" r="2" fill="#c7d2fe" />
-          <circle cx="36" cy="20" r="2" fill="#c7d2fe" />
-          <circle cx="17" cy="34" r="2" fill="#e0e7ff" />
-          <circle cx="31" cy="34" r="2" fill="#e0e7ff" />
+          <circle cx="24" cy="11" r="2.5" fill="#fef08a" />
+          <circle cx="12" cy="20" r="2" fill="#fed7aa" />
+          <circle cx="36" cy="20" r="2" fill="#fed7aa" />
+          <circle cx="17" cy="34" r="2" fill="#ffffff" />
+          <circle cx="31" cy="34" r="2" fill="#ffffff" />
 
           {/* Connecting Synaptic Fibers */}
-          <line x1="24" y1="11" x2="12" y2="20" stroke="#c7d2fe" strokeWidth="1" strokeOpacity="0.7" />
-          <line x1="24" y1="11" x2="36" y2="20" stroke="#c7d2fe" strokeWidth="1" strokeOpacity="0.7" />
-          <line x1="12" y1="20" x2="17" y2="34" stroke="#c7d2fe" strokeWidth="1" strokeOpacity="0.5" />
-          <line x1="36" y1="20" x2="31" y2="34" stroke="#c7d2fe" strokeWidth="1" strokeOpacity="0.5" />
+          <line x1="24" y1="11" x2="12" y2="20" stroke="#fed7aa" strokeWidth="1" strokeOpacity="0.7" />
+          <line x1="24" y1="11" x2="36" y2="20" stroke="#fed7aa" strokeWidth="1" strokeOpacity="0.7" />
+          <line x1="12" y1="20" x2="17" y2="34" stroke="#fed7aa" strokeWidth="1" strokeOpacity="0.5" />
+          <line x1="36" y1="20" x2="31" y2="34" stroke="#fed7aa" strokeWidth="1" strokeOpacity="0.5" />
         </svg>
       </div>
 
       {showText && (
         <div className="flex flex-col select-none">
           <div className="flex items-center gap-1.5">
-            <span className="font-extrabold tracking-tight text-lg text-slate-900 dark:text-white leading-none">
-              Study<span className="text-sky-600 dark:text-sky-400">Sphere</span>
+            <span className="font-extrabold tracking-tight text-lg text-[#1b4356] dark:text-white leading-none">
+              Study<span className="text-[#ff765e]">Sphere</span>
             </span>
-            <span className="px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider bg-sky-50 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 rounded border border-sky-200/60 dark:border-sky-800/60">
+            <span className="px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-white/80 dark:bg-sky-950/70 text-[#1b4356] dark:text-sky-300 rounded-full border border-[#b2e8e4]">
               AI Tutor
             </span>
           </div>
-          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium tracking-tight">
+          <span className="text-[11px] text-[#4d7a8d] dark:text-slate-400 font-medium tracking-tight">
             Your Personal Learning Assistant
           </span>
         </div>

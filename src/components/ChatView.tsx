@@ -177,22 +177,22 @@ export const ChatView: React.FC<ChatViewProps> = ({
   ];
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-sky-50/20 dark:bg-slate-950 overflow-hidden relative">
+    <div className="flex-1 flex flex-col h-full bg-[#cbeeee] dark:bg-slate-950 overflow-hidden relative">
       {/* Top Banner if Document is linked */}
       {selectedDocId && (
-        <div className="bg-sky-50 dark:bg-sky-950/60 border-b border-sky-200/60 dark:border-sky-800/60 px-4 py-2 flex items-center justify-between text-xs text-sky-900 dark:text-sky-200 shrink-0">
+        <div className="bg-[#daf4f1] dark:bg-sky-950/60 border-b border-[#b2e8e4] dark:border-sky-800/60 px-4 py-2 flex items-center justify-between text-xs text-[#1b4356] dark:text-sky-200 shrink-0">
           <div className="flex items-center gap-2 truncate">
-            <FileText className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0" />
+            <FileText className="w-3.5 h-3.5 text-[#ff765e] shrink-0" />
             <span>
               Grounded in study material:{' '}
-              <strong className="font-semibold">
+              <strong className="font-bold">
                 {documents.find(d => d.id === selectedDocId)?.title || 'Selected Document'}
               </strong>
             </span>
           </div>
           <button
             onClick={() => setSelectedDocId('')}
-            className="p-1 hover:text-sky-600 dark:hover:text-sky-300 ml-2"
+            className="p-1 hover:text-[#ff765e] text-[#517c8d] ml-2"
             title="Detach document"
           >
             <X className="w-3.5 h-3.5" />
@@ -206,13 +206,13 @@ export const ChatView: React.FC<ChatViewProps> = ({
           // Welcome Screen
           <div className="max-w-3xl mx-auto py-8">
             <div className="text-center space-y-3 mb-10">
-              <div className="inline-flex p-3 rounded-2xl bg-gradient-to-tr from-sky-500/10 via-blue-500/10 to-cyan-500/10 border border-sky-200/60 dark:border-sky-800/50 mb-2">
-                <Sparkles className="w-7 h-7 text-sky-600 dark:text-sky-400 animate-pulse" />
+              <div className="inline-flex p-3 rounded-2xl bg-white/80 dark:bg-slate-900 border border-[#b2e8e4] dark:border-sky-800/50 mb-2 shadow-xs">
+                <Sparkles className="w-7 h-7 text-[#ff765e] animate-pulse" />
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-black text-[#1b4356] dark:text-white tracking-tight">
                 Welcome to StudySphere
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
+              <p className="text-sm sm:text-base text-[#517c8d] dark:text-slate-400 max-w-xl mx-auto font-medium">
                 What would you like to learn today? Chat about academic concepts, upload study materials for RAG-grounded answers, or take custom quizzes.
               </p>
             </div>
@@ -225,16 +225,16 @@ export const ChatView: React.FC<ChatViewProps> = ({
                   <div
                     key={item.id}
                     onClick={() => onNavigateToTab(item.id)}
-                    className="group p-4 rounded-2xl bg-white dark:bg-slate-900 border border-sky-100/90 dark:border-slate-800/80 hover:border-sky-400 dark:hover:border-sky-500 shadow-xs hover:shadow-md transition-all cursor-pointer flex items-start gap-3.5"
+                    className="group p-4 rounded-3xl bg-white/90 dark:bg-slate-900 border border-[#b2e8e4] dark:border-slate-800/80 hover:border-[#ff765e] dark:hover:border-sky-500 shadow-sm hover:shadow-md transition-all cursor-pointer flex items-start gap-3.5"
                   >
-                    <div className="p-2.5 rounded-xl bg-gradient-to-tr from-sky-500 to-blue-600 text-white shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                    <div className="p-2.5 rounded-2xl bg-gradient-to-tr from-[#ff765e] to-[#f4624b] text-white shrink-0 shadow-sm group-hover:scale-105 transition-transform">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                      <h3 className="text-sm font-bold text-[#1b4356] dark:text-white group-hover:text-[#ff765e] dark:group-hover:text-sky-400 transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2">
+                      <p className="text-xs text-[#517c8d] dark:text-slate-400 mt-0.5 line-clamp-2">
                         {item.desc}
                       </p>
                     </div>
@@ -245,7 +245,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
 
             {/* Suggested Academic Prompts */}
             <div>
-              <span className="text-xs font-semibold tracking-wider uppercase text-slate-400 dark:text-slate-500 block mb-3">
+              <span className="text-xs font-bold tracking-wider uppercase text-[#517c8d] dark:text-slate-500 block mb-3">
                 Suggested Prompts
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -256,12 +256,12 @@ export const ChatView: React.FC<ChatViewProps> = ({
                       setInputText(p.desc);
                       textareaRef.current?.focus();
                     }}
-                    className="text-left p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-sky-100 dark:border-slate-800 hover:bg-sky-50/60 dark:hover:bg-slate-800/60 transition group"
+                    className="text-left p-4 rounded-2xl bg-white/90 dark:bg-slate-900 border border-[#b2e8e4] dark:border-slate-800 hover:bg-white hover:border-[#ff765e]/60 transition-all group shadow-2xs"
                   >
-                    <span className="text-xs font-semibold text-sky-600 dark:text-sky-400 block group-hover:underline">
+                    <span className="text-xs font-bold text-[#1b4356] dark:text-sky-400 block group-hover:text-[#ff765e]">
                       {p.title}
                     </span>
-                    <span className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 mt-1">
+                    <span className="text-xs text-[#517c8d] dark:text-slate-300 line-clamp-2 mt-1">
                       {p.desc}
                     </span>
                   </button>
@@ -283,21 +283,21 @@ export const ChatView: React.FC<ChatViewProps> = ({
                   className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}
                 >
                   <div className="flex items-center gap-2 mb-1 px-1">
-                    <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+                    <span className="text-[11px] font-bold text-[#517c8d] dark:text-slate-400">
                       {isUser ? (currentUser?.name || 'You') : 'StudySphere AI'}
                     </span>
                     {msg.learningMode && msg.learningMode !== 'general' && (
-                      <span className="text-[10px] uppercase font-bold px-1.5 py-0.2 rounded bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400 border border-sky-200/50 dark:border-sky-800/50">
+                      <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-white/80 dark:bg-sky-950 text-[#1b4356] dark:text-sky-400 border border-[#b2e8e4] dark:border-sky-800/50">
                         {msg.learningMode}
                       </span>
                     )}
                   </div>
 
                   <div
-                    className={`relative group rounded-2xl p-4 sm:p-5 max-w-[92%] sm:max-w-[85%] shadow-xs ${
+                    className={`relative group rounded-3xl p-4 sm:p-5 max-w-[92%] sm:max-w-[85%] shadow-sm ${
                       isUser
-                        ? 'bg-sky-600 text-white rounded-tr-xs'
-                        : 'bg-white dark:bg-slate-900 border border-sky-100 dark:border-slate-800/80 text-slate-900 dark:text-slate-100 rounded-tl-xs'
+                        ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white rounded-tr-xs shadow-[#f4624b]/20 font-medium'
+                        : 'bg-white dark:bg-slate-900 border border-[#b2e8e4] dark:border-slate-800/80 text-[#1b4356] dark:text-slate-100 rounded-tl-xs'
                     }`}
                   >
                     {editingMessageId === msg.id ? (
@@ -305,19 +305,19 @@ export const ChatView: React.FC<ChatViewProps> = ({
                         <textarea
                           value={editInputText}
                           onChange={e => setEditInputText(e.target.value)}
-                          className="w-full text-xs p-2.5 rounded-lg bg-sky-700 text-white border border-sky-400 focus:outline-none"
+                          className="w-full text-xs p-2.5 rounded-xl bg-white/20 text-white placeholder-white/70 border border-white/50 focus:outline-none"
                           rows={3}
                         />
                         <div className="flex items-center justify-end gap-2 text-xs">
                           <button
                             onClick={() => setEditingMessageId(null)}
-                            className="px-2.5 py-1 rounded bg-sky-800 text-white hover:bg-sky-900"
+                            className="px-2.5 py-1 rounded-lg bg-black/20 text-white hover:bg-black/30"
                           >
                             Cancel
                           </button>
                           <button
                             onClick={handleSaveEdit}
-                            className="px-2.5 py-1 rounded bg-white text-sky-700 font-semibold hover:bg-slate-100"
+                            className="px-3 py-1 rounded-lg bg-white text-[#f4624b] font-bold hover:bg-slate-100"
                           >
                             Resubmit
                           </button>
@@ -333,8 +333,8 @@ export const ChatView: React.FC<ChatViewProps> = ({
 
                         {/* Citations Pill from Document RAG */}
                         {msg.documentCitations && msg.documentCitations.length > 0 && (
-                          <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800/80">
-                            <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1.5">
+                          <div className="mt-3 pt-3 border-t border-[#b2e8e4]/60 dark:border-slate-800/80">
+                            <span className="text-[11px] font-bold text-[#517c8d] dark:text-slate-500 uppercase tracking-wider block mb-1.5">
                               Document Sources & Grounding:
                             </span>
                             <div className="flex flex-wrap gap-1.5">
@@ -347,10 +347,10 @@ export const ChatView: React.FC<ChatViewProps> = ({
                                       snippet: cit.snippet,
                                     })
                                   }
-                                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs bg-sky-50 dark:bg-sky-950/60 hover:bg-sky-100 dark:hover:bg-sky-900/60 text-sky-700 dark:text-sky-300 border border-sky-200/60 dark:border-sky-800/60 transition"
+                                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl text-xs bg-[#e2f7f5] dark:bg-sky-950/60 hover:bg-[#d0f2ee] dark:hover:bg-sky-900/60 text-[#1b4356] dark:text-sky-300 border border-[#b2e8e4] dark:border-sky-800/60 transition"
                                 >
-                                  <FileText className="w-3 h-3" />
-                                  <span className="font-medium truncate max-w-[180px]">
+                                  <FileText className="w-3 h-3 text-[#ff765e]" />
+                                  <span className="font-semibold truncate max-w-[180px]">
                                     {cit.documentTitle} (Chunk #{cit.chunkIndex})
                                   </span>
                                 </button>
@@ -361,14 +361,14 @@ export const ChatView: React.FC<ChatViewProps> = ({
 
                         {/* StudySphere Memory Suggestion Trigger */}
                         {msg.memorySuggestion && (
-                          <div className="mt-3.5 p-3 rounded-xl bg-sky-50 dark:bg-sky-950/50 border border-sky-200 dark:border-sky-800/60 flex items-start justify-between gap-3">
+                          <div className="mt-3.5 p-3 rounded-2xl bg-[#e2f7f5] dark:bg-sky-950/50 border border-[#b2e8e4] dark:border-sky-800/60 flex items-start justify-between gap-3">
                             <div className="flex items-start gap-2.5">
-                              <Brain className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
+                              <Brain className="w-4 h-4 text-[#ff765e] shrink-0 mt-0.5" />
                               <div>
-                                <span className="text-xs font-semibold text-sky-900 dark:text-sky-200">
+                                <span className="text-xs font-bold text-[#1b4356] dark:text-sky-200">
                                   StudySphere Memory Suggestion
                                 </span>
-                                <p className="text-xs text-sky-700 dark:text-sky-300 mt-0.5">
+                                <p className="text-xs text-[#517c8d] dark:text-sky-300 mt-0.5">
                                   "{msg.memorySuggestion}"
                                 </p>
                               </div>
@@ -376,7 +376,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                             <div className="flex items-center gap-1.5 shrink-0">
                               <button
                                 onClick={() => onSaveSuggestedMemory(msg.memorySuggestion!)}
-                                className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-sky-600 hover:bg-sky-700 text-white transition shadow-2xs"
+                                className="px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white transition shadow-sm hover:shadow"
                               >
                                 Remember This
                               </button>
@@ -388,11 +388,11 @@ export const ChatView: React.FC<ChatViewProps> = ({
                   </div>
 
                   {/* Actions Bar underneath message */}
-                  <div className="flex items-center gap-2 mt-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity text-slate-400 text-xs">
+                  <div className="flex items-center gap-2 mt-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity text-[#517c8d] text-xs">
                     {isUser && !editingMessageId && (
                       <button
                         onClick={() => handleStartEdit(msg)}
-                        className="flex items-center gap-1 hover:text-slate-600 dark:hover:text-slate-200"
+                        className="flex items-center gap-1 hover:text-[#1b4356] dark:hover:text-slate-200"
                         title="Edit and resubmit"
                       >
                         <Edit3 className="w-3 h-3" />
@@ -403,7 +403,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                       <button
                         onClick={onRegenerate}
                         disabled={isLoading}
-                        className="flex items-center gap-1 hover:text-sky-600 dark:hover:text-sky-400 transition"
+                        className="flex items-center gap-1 hover:text-[#ff765e] dark:hover:text-sky-400 transition font-semibold"
                         title="Regenerate response"
                       >
                         <RotateCcw className="w-3 h-3" />
@@ -418,14 +418,14 @@ export const ChatView: React.FC<ChatViewProps> = ({
             {/* Loading Indicator */}
             {isLoading && (
               <div className="flex flex-col items-start space-y-1">
-                <span className="text-[11px] font-semibold text-slate-400 px-1">
+                <span className="text-[11px] font-bold text-[#517c8d] px-1">
                   StudySphere AI is thinking...
                 </span>
-                <div className="rounded-2xl p-4 bg-white dark:bg-slate-900 border border-sky-100 dark:border-slate-800 flex items-center gap-2.5 shadow-2xs">
-                  <div className="w-2 h-2 rounded-full bg-sky-500 animate-bounce" />
-                  <div className="w-2 h-2 rounded-full bg-sky-500 animate-bounce [animation-delay:0.2s]" />
-                  <div className="w-2 h-2 rounded-full bg-sky-500 animate-bounce [animation-delay:0.4s]" />
-                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium pl-1">
+                <div className="rounded-2xl p-4 bg-white dark:bg-slate-900 border border-[#b2e8e4] dark:border-slate-800 flex items-center gap-2.5 shadow-sm">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ff765e] animate-bounce" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ff765e] animate-bounce [animation-delay:0.2s]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ff765e] animate-bounce [animation-delay:0.4s]" />
+                  <span className="text-xs text-[#517c8d] dark:text-slate-400 font-semibold pl-1">
                     Analyzing concepts & formulating explanation...
                   </span>
                 </div>
@@ -439,29 +439,29 @@ export const ChatView: React.FC<ChatViewProps> = ({
 
       {/* Citation Preview Modal */}
       {previewCitation && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-2xs flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-5 border border-slate-200 dark:border-slate-800 shadow-xl space-y-3">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+        <div className="fixed inset-0 z-50 bg-[#1b4356]/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 border border-[#b2e8e4] dark:border-slate-800 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-[#b2e8e4] dark:border-slate-800">
               <div className="flex items-center gap-2">
-                <FileText className="w-4 h-4 text-indigo-600" />
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white truncate">
+                <FileText className="w-4 h-4 text-[#ff765e]" />
+                <h4 className="text-sm font-bold text-[#1b4356] dark:text-white truncate">
                   {previewCitation.documentTitle}
                 </h4>
               </div>
               <button
                 onClick={() => setPreviewCitation(null)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                className="text-[#517c8d] hover:text-[#1b4356] dark:hover:text-slate-200"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
-            <div className="text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-xl border border-slate-200/60 dark:border-slate-700/60 max-h-60 overflow-y-auto leading-relaxed">
+            <div className="text-xs text-[#1b4356] dark:text-slate-300 bg-[#eefaf9] dark:bg-slate-800/60 p-4 rounded-2xl border border-[#b2e8e4] dark:border-slate-700/60 max-h-60 overflow-y-auto leading-relaxed">
               "{previewCitation.snippet}"
             </div>
             <div className="flex justify-end pt-1">
               <button
                 onClick={() => setPreviewCitation(null)}
-                className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200"
+                className="px-4 py-2 rounded-xl text-xs font-bold bg-[#daf4f1] hover:bg-[#c7eee9] text-[#1b4356] transition"
               >
                 Close
               </button>
@@ -471,19 +471,19 @@ export const ChatView: React.FC<ChatViewProps> = ({
       )}
 
       {/* Input Box Bottom Container */}
-      <div className="p-4 sm:p-5 border-t border-slate-200 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shrink-0">
-        <div className="max-w-3xl mx-auto space-y-2">
+      <div className="p-4 sm:p-5 border-t border-[#b2e8e4] dark:border-slate-800/80 bg-[#d8f4f2]/90 dark:bg-slate-900/90 backdrop-blur-md shrink-0">
+        <div className="max-w-3xl mx-auto space-y-2.5">
           {/* Controls Bar: Learning Mode & Document Attachment & Level */}
           <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
             <div className="flex flex-wrap items-center gap-2">
               {/* Learning Mode selector */}
-              <div className="flex items-center bg-slate-100 dark:bg-slate-800 rounded-xl px-2.5 py-1 border border-slate-200/60 dark:border-slate-700/60">
-                <BookOpen className="w-3.5 h-3.5 text-slate-500 mr-1.5" />
-                <span className="text-[11px] text-slate-400 mr-1">Mode:</span>
+              <div className="flex items-center bg-white/90 dark:bg-slate-800 rounded-xl px-2.5 py-1.5 border border-[#b2e8e4] dark:border-slate-700/60 shadow-2xs">
+                <BookOpen className="w-3.5 h-3.5 text-[#ff765e] mr-1.5" />
+                <span className="text-[11px] font-bold text-[#517c8d] mr-1">Mode:</span>
                 <select
                   value={learningMode}
                   onChange={e => setLearningMode(e.target.value)}
-                  className="bg-transparent text-xs font-medium text-slate-800 dark:text-slate-200 focus:outline-none cursor-pointer"
+                  className="bg-transparent text-xs font-bold text-[#1b4356] dark:text-slate-200 focus:outline-none cursor-pointer"
                 >
                   <option value="general" className="dark:bg-slate-900">General Q&A</option>
                   <option value="step-by-step" className="dark:bg-slate-900">Step-by-Step</option>
@@ -496,13 +496,13 @@ export const ChatView: React.FC<ChatViewProps> = ({
 
               {/* Grounding Document selector */}
               {documents.length > 0 && (
-                <div className="flex items-center bg-slate-100 dark:bg-slate-800 rounded-xl px-2.5 py-1 border border-slate-200/60 dark:border-slate-700/60">
-                  <FileText className="w-3.5 h-3.5 text-slate-500 mr-1.5" />
-                  <span className="text-[11px] text-slate-400 mr-1">Doc:</span>
+                <div className="flex items-center bg-white/90 dark:bg-slate-800 rounded-xl px-2.5 py-1.5 border border-[#b2e8e4] dark:border-slate-700/60 shadow-2xs">
+                  <FileText className="w-3.5 h-3.5 text-[#308197] mr-1.5" />
+                  <span className="text-[11px] font-bold text-[#517c8d] mr-1">Doc:</span>
                   <select
                     value={selectedDocId}
                     onChange={e => setSelectedDocId(e.target.value)}
-                    className="bg-transparent text-xs font-medium text-slate-800 dark:text-slate-200 focus:outline-none cursor-pointer max-w-[140px] truncate"
+                    className="bg-transparent text-xs font-bold text-[#1b4356] dark:text-slate-200 focus:outline-none cursor-pointer max-w-[140px] truncate"
                   >
                     <option value="" className="dark:bg-slate-900">All / None</option>
                     {documents.map(d => (
@@ -517,15 +517,15 @@ export const ChatView: React.FC<ChatViewProps> = ({
 
             {/* Knowledge Level */}
             <div className="flex items-center gap-1.5">
-              <span className="text-[11px] text-slate-400">Level:</span>
+              <span className="text-[11px] font-bold text-[#517c8d]">Level:</span>
               {(['Beginner', 'Intermediate', 'Advanced'] as const).map(lvl => (
                 <button
                   key={lvl}
                   onClick={() => setKnowledgeLevel(lvl)}
-                  className={`px-2 py-0.5 rounded-lg text-[10px] font-semibold transition ${
+                  className={`px-2.5 py-1 rounded-xl text-[10px] font-bold transition shadow-2xs ${
                     knowledgeLevel === lvl
-                      ? 'bg-sky-600 text-white'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                      ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white shadow-[#f4624b]/20'
+                      : 'bg-white/80 dark:bg-slate-800 text-[#517c8d] hover:bg-white border border-[#b2e8e4]'
                   }`}
                 >
                   {lvl}
@@ -543,7 +543,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
               onChange={handleTextareaInput}
               onKeyDown={handleKeyDown}
               placeholder="Ask anything, request an explanation, or upload study notes... (Shift+Enter for newline)"
-              className="w-full pl-4 pr-24 py-3.5 bg-slate-50 dark:bg-slate-800/90 border border-sky-200/80 dark:border-slate-700/80 rounded-2xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/40 resize-none transition shadow-2xs leading-relaxed max-h-48"
+              className="w-full pl-4 pr-24 py-3.5 bg-white dark:bg-slate-800/90 border-2 border-[#b2e8e4] focus:border-[#ff765e] rounded-2xl text-sm text-[#1b4356] dark:text-white placeholder:text-[#517c8d]/60 focus:outline-none focus:ring-4 focus:ring-[#ff765e]/15 resize-none transition shadow-sm leading-relaxed max-h-48"
             />
 
             <div className="absolute right-2.5 bottom-2.5 flex items-center gap-1.5">
@@ -551,7 +551,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                 <button
                   type="button"
                   onClick={onStopGeneration}
-                  className="p-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white transition shadow-xs"
+                  className="p-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white transition shadow-sm"
                   title="Stop generation"
                 >
                   <Square className="w-4 h-4 fill-current" />
@@ -560,21 +560,21 @@ export const ChatView: React.FC<ChatViewProps> = ({
                 <button
                   type="submit"
                   disabled={!inputText.trim()}
-                  className={`p-2 rounded-xl transition shadow-xs ${
+                  className={`p-2.5 rounded-xl transition shadow-md ${
                     inputText.trim()
-                      ? 'bg-sky-600 hover:bg-sky-700 text-white shadow-sky-500/20'
-                      : 'bg-slate-200 dark:bg-slate-700 text-slate-400 cursor-not-allowed'
+                      ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#f8674f] hover:to-[#e65239] text-white shadow-[#f4624b]/25 hover:scale-105'
+                      : 'bg-[#bfeae6] dark:bg-slate-700 text-[#517c8d]/60 cursor-not-allowed'
                   }`}
                   title="Send message"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-4 h-4 stroke-[2.5]" />
                 </button>
               )}
             </div>
           </form>
 
-          <div className="flex items-center justify-between text-[11px] text-slate-400 px-1">
-            <span>Powered by Gemini 3.8 & StudySphere Grounding</span>
+          <div className="flex items-center justify-between text-[11px] text-[#517c8d] px-1 font-medium">
+            <span>Powered by Gemini & StudySphere Grounding</span>
             <span>Responses adapted to {knowledgeLevel} • {selectedLanguage}</span>
           </div>
         </div>
