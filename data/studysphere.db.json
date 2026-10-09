@@ -1,0 +1,225 @@
+{
+  "users": [
+    {
+      "id": "usr-student-01",
+      "email": "student@studysphere.edu",
+      "name": "Alex Rivera",
+      "passwordHash": "c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71e088d94ee54b4dbac830c588b52f20c334e3eaec71286a64c1caa",
+      "salt": "studysphere_default_salt",
+      "preferredLanguage": "English",
+      "theme": "light",
+      "enableMemory": true,
+      "createdAt": "2026-10-09T18:07:52.806Z"
+    }
+  ],
+  "memories": [
+    {
+      "id": "mem-01",
+      "userId": "usr-student-01",
+      "fact": "Preparing for Machine Learning & Distributed Systems exams in May.",
+      "category": "goal",
+      "createdAt": "2026-10-09T18:07:52.806Z",
+      "updatedAt": "2026-10-09T18:07:52.806Z"
+    },
+    {
+      "id": "mem-02",
+      "userId": "usr-student-01",
+      "fact": "Prefers explanations with real-world Python code examples and intuitive analogies.",
+      "category": "preference",
+      "createdAt": "2026-10-09T18:07:52.806Z",
+      "updatedAt": "2026-10-09T18:07:52.806Z"
+    }
+  ],
+  "documents": [],
+  "conversations": [
+    {
+      "id": "conv-welcome-01",
+      "userId": "usr-student-01",
+      "title": "Introduction to Transformers & Attention Mechanism",
+      "subject": "Computer Science",
+      "learningMode": "step-by-step",
+      "language": "English",
+      "createdAt": "2026-10-09T18:07:52.806Z",
+      "updatedAt": "2026-10-09T18:07:52.806Z"
+    },
+    {
+      "id": "conv-1791569282625-gyxe",
+      "userId": "usr-student-01",
+      "title": "What is the primary difference between Superv...",
+      "learningMode": "general",
+      "language": "English",
+      "createdAt": "2026-10-09T18:08:02.625Z",
+      "updatedAt": "2026-10-09T18:08:52.690Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg-01",
+      "conversationId": "conv-welcome-01",
+      "role": "user",
+      "content": "Can you explain how Self-Attention works in simple terms with an example?",
+      "timestamp": "2026-10-09T17:07:52.806Z"
+    },
+    {
+      "id": "msg-02",
+      "conversationId": "conv-welcome-01",
+      "role": "assistant",
+      "content": "### Understanding Self-Attention\n\nSelf-attention allows a neural network to weigh the importance of different words in a sentence when processing a specific word.\n\n#### The Intuitive Analogy: The Cocktail Party\nImagine you are at a noisy cocktail party talking to a friend:\n- **Query ($Q$):** What you are currently listening for.\n- **Key ($K$):** The sound tags from every person speaking in the room.\n- **Value ($V$):** The actual spoken content.\n\nWhen your Query matches a Key (a friend mentioning your name), the attention score shoots up, allowing you to focus on their Value!\n\n#### Mathematical Core\nThe scaled dot-product attention formula is:\n$$\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V$$\n\n#### Quick Python Illustration\n```python\nimport numpy as np\n\ndef scaled_dot_product_attention(Q, K, V):\n    d_k = Q.shape[-1]\n    scores = np.matmul(Q, K.T) / np.sqrt(d_k)\n    weights = np.exp(scores) / np.sum(np.exp(scores), axis=-1, keepdims=True)\n    return np.matmul(weights, V), weights\n```\n\nWould you like to explore Multi-Head Attention next or test your understanding with a short quiz?",
+      "timestamp": "2026-10-09T18:07:52.806Z"
+    },
+    {
+      "id": "msg-1791569282626-u",
+      "conversationId": "conv-1791569282625-gyxe",
+      "role": "user",
+      "content": "What is the primary difference between Supervised and Unsupervised Learning?",
+      "timestamp": "2026-10-09T18:08:02.626Z",
+      "learningMode": "general"
+    },
+    {
+      "id": "msg-1791569332690-a",
+      "conversationId": "conv-1791569282625-gyxe",
+      "role": "assistant",
+      "content": "At its core, the primary difference between **Supervised Learning** and **Unsupervised Learning** lies in the presence or absence of **ground-truth labels** ($y$) during model training.\n\n* **Supervised Learning:** Models learn a mapping function from input features to target labels:\n  $$\\hat{y} = f(X)$$\n  The algorithm is guided by feedback from a loss function $\\mathcal{L}(y, \\hat{y})$ that measures the discrepancy between predictions $\\hat{y}$ and known targets $y$.\n* **Unsupervised Learning:** Models work strictly with unlabeled feature data $X$. The objective is to uncover underlying geometric structures, latent probability distributions $P(X)$, or groupings without any external supervisory signal:\n  $$Z = f(X) \\quad \\text{or} \\quad P(X)$$\n\n---\n\n### The Intuitive Analogy\n\n* **Supervised Learning:** Think of studying for your exams using **flashcards with questions on the front and answers on the back**. You make a guess, flip the card, check the true answer, and adjust your understanding based on your error.\n* **Unsupervised Learning:** Imagine being handed an unsorted box of **unlabeled hardware components** (screws, bolts, washers, nuts) and asked to organize them. Nobody tells you the category names; you naturally group items based on shared physical attributes like size, thread pitch, and shape.\n\n---\n\n### Key Dimensions of Comparison\n\n| Dimension | Supervised Learning | Unsupervised Learning |\n| :--- | :--- | :--- |\n| **Input Data** | Labeled: pairs $(X_i, y_i)$ | Unlabeled: feature vectors $X_i$ |\n| **Primary Tasks** | **Classification** (discrete labels), **Regression** (continuous values) | **Clustering**, **Dimensionality Reduction**, **Density Estimation** |\n| **Feedback Loop** | Direct error metric (e.g., Cross-Entropy, MSE) | Indirect proxy objectives (e.g., inertia, reconstruction error) |\n| **Common Algorithms**| Linear/Logistic Regression, Random Forests, SVMs, Gradient Boosting | $k$-Means, DBSCAN, PCA, Autoencoders, Gaussian Mixture Models |\n| **Evaluation Metrics**| Accuracy, $F_1$-score, ROC-AUC, RMSE | Silhouette Score, Davies-Bouldin Index, Explained Variance Ratio |\n\n---\n\n### Python Implementation: Side-by-Side Comparison\n\nHere is how this distinction looks in practice using `scikit-learn`:\n\n```python\nimport numpy as np\nfrom sklearn.datasets import make_blobs\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.cluster import KMeans\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import accuracy_score, silhouette_score\n\n# 1. Generate synthetic feature data (X) and ground truth (y)\nX, y_true = make_blobs(n_samples=300, centers=3, n_features=2, random_state=42)\n\n# ==========================================\n# SUPERVISED LEARNING: Classification\n# ==========================================\n# We provide BOTH features (X) and labels (y) to train the model\nX_train, X_test, y_train, y_test = train_test_split(X, y_true, test_size=0.2, random_state=42)\n\nclf = LogisticRegression()\nclf.fit(X_train, y_train)          # Model maps X -> y using true labels\ny_pred = clf.predict(X_test)\n\nprint(f\"Supervised Test Accuracy: {accuracy_score(y_test, y_pred):.2f}\")\n\n\n# ==========================================\n# UNSUPERVISED LEARNING: Clustering\n# ==========================================\n# We ONLY supply features (X). The model has no access to y_true.\nkmeans = KMeans(n_clusters=3, random_state=42, n_init='auto')\ncluster_assignments = kmeans.fit_predict(X)  # Discovers grouping from X alone\n\n# Evaluated without labels (e.g., Silhouette Score measures cluster cohesion/separation)\nsil_score = silhouette_score(X, cluster_assignments)\nprint(f\"Unsupervised Silhouette Score: {sil_score:.2f}\")\n```\n\n---\n\n### Exam Prep High-Yield Takeaway\n\nFor your upcoming machine learning exam, watch out for edge-case definitions:\n1. **Semi-Supervised Learning:** Bridges the two paradigms—uses a small labeled subset alongside a large pool of unlabeled data (common in real-world pipelines where labeling is expensive).\n2. **Self-Supervised Learning:** Often categorized under unsupervised learning because no human labels are provided, but technically framed as supervised learning by generating pseudo-labels directly from the input structure (e.g., Masked Language Modeling in BERT or contrastive vision tasks).",
+      "timestamp": "2026-10-09T18:08:52.690Z",
+      "learningMode": "general"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "quiz-sample-01",
+      "userId": "usr-student-01",
+      "title": "Deep Learning & Attention Foundations",
+      "topic": "Machine Learning",
+      "difficulty": "medium",
+      "timeLimitMinutes": 10,
+      "createdAt": "2026-10-09T18:07:52.806Z",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "mcq",
+          "question": "Why do we scale the dot product of Q and K by $\\sqrt{d_k}$ in scaled dot-product attention?",
+          "options": [
+            "To prevent the dot products from growing excessively large for large dimensions, which would cause small gradients in softmax.",
+            "To speed up matrix multiplication.",
+            "To ensure matrix dimensions match during backpropagation.",
+            "To normalize values between 0 and 1."
+          ],
+          "correctAnswer": "To prevent the dot products from growing excessively large for large dimensions, which would cause small gradients in softmax.",
+          "explanation": "For large values of d_k, dot products grow large in magnitude, pushing the softmax function into regions with extremely small gradients. Dividing by $\\sqrt{d_k}$ stabilizes training."
+        },
+        {
+          "id": "q2",
+          "type": "true-false",
+          "question": "True or False: Transformers process input tokens sequentially like Recurrent Neural Networks (RNNs).",
+          "options": [
+            "True",
+            "False"
+          ],
+          "correctAnswer": "False",
+          "explanation": "Transformers process all tokens simultaneously in parallel using positional encodings rather than sequential recurrence."
+        },
+        {
+          "id": "q3",
+          "type": "short-answer",
+          "question": "What is the purpose of Positional Encoding in the Transformer architecture?",
+          "correctAnswer": "Since transformers process tokens simultaneously without recurrence or convolution, positional encodings inject information about the relative or absolute position of tokens in the sequence.",
+          "explanation": "Without positional encodings, the attention mechanism is permutation invariant."
+        }
+      ]
+    }
+  ],
+  "quizAttempts": [],
+  "studyPlans": [
+    {
+      "id": "plan-01",
+      "userId": "usr-student-01",
+      "title": "Master Transformer Architectures & LLM Engineering",
+      "goal": "Understand transformer internals, RAG pipelines, and build production AI systems.",
+      "targetLevel": "intermediate",
+      "timeframeWeeks": 4,
+      "availableHoursPerWeek": 8,
+      "status": "active",
+      "createdAt": "2026-10-09T18:07:52.806Z",
+      "updatedAt": "2026-10-09T18:07:52.806Z",
+      "stages": [
+        {
+          "id": "stg-1",
+          "title": "Week 1: Attention & Architecture Foundations",
+          "order": 1,
+          "tasks": [
+            {
+              "id": "tsk-101",
+              "title": "Review Dot-Product & Multi-Head Attention",
+              "description": "Study Q, K, V projections and matrix dimension shapes.",
+              "durationMinutes": 45,
+              "completed": true,
+              "type": "concept"
+            },
+            {
+              "id": "tsk-102",
+              "title": "Implement scaled dot-product attention in Python/NumPy",
+              "description": "Code the forward pass and verify softmax weight distributions.",
+              "durationMinutes": 60,
+              "completed": true,
+              "type": "practice"
+            },
+            {
+              "id": "tsk-103",
+              "title": "Take Deep Learning Attention Quiz",
+              "description": "Test understanding of scaling factor and positional encoding.",
+              "durationMinutes": 20,
+              "completed": false,
+              "type": "quiz"
+            }
+          ]
+        },
+        {
+          "id": "stg-2",
+          "title": "Week 2: Embeddings, Vector Search & RAG Systems",
+          "order": 2,
+          "tasks": [
+            {
+              "id": "tsk-201",
+              "title": "Study Chunking strategies and Vector Embeddings",
+              "description": "Explore cosine similarity, token limits, and semantic chunking.",
+              "durationMinutes": 50,
+              "completed": false,
+              "type": "reading"
+            },
+            {
+              "id": "tsk-202",
+              "title": "Upload textbook chapter and test document Q&A in StudySphere",
+              "description": "Verify grounded citations and retrieval accuracy.",
+              "durationMinutes": 40,
+              "completed": false,
+              "type": "practice"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "activities": [
+    {
+      "id": "act-01",
+      "userId": "usr-student-01",
+      "action": "chat",
+      "details": "Explored Self-Attention mechanisms in deep learning",
+      "timestamp": "2026-10-09T17:07:52.806Z"
+    },
+    {
+      "id": "act-02",
+      "userId": "usr-student-01",
+      "action": "task_completed",
+      "details": "Finished lesson on Attention Math & Matrix Dimensions",
+      "timestamp": "2026-10-08T18:07:52.806Z"
+    },
+    {
+      "id": "act-1791569332690-27t05",
+      "userId": "usr-student-01",
+      "action": "chat",
+      "details": "Studied \"What is the primary difference...\" in general mode",
+      "timestamp": "2026-10-09T18:08:52.690Z"
+    }
+  ]
+}

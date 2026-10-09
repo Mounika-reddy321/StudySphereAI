@@ -1,0 +1,6 @@
+{
+  "name": "StudySphere",
+  "description": "Your Personal AI Learning Assistant — intelligent conversations, document RAG, user-controlled memory, quizzes, study roadmaps, and analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
