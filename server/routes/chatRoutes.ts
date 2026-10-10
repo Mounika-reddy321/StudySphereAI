@@ -191,17 +191,26 @@ chatRouter.post('/chat', requireAuth, async (req: AuthenticatedRequest, res: Res
   });
 
   try {
-    // Call Gemini 3.1 Flash-Lite with MINIMAL thinking for sub-second responses
+    // Call Gemini with thinkingBudget: 0 for sub-second, Claude-like instant generation
     const response = await ai.models.generateContent({
       model: DEFAULT_MODEL,
       contents,
       config: {
         systemInstruction,
         temperature: 0.7,
+        thinkingConfig: {
+          thinkingBudget: 0,
+        },
       },
     });
 
-    let rawOutput = response.text || "I'm ready to help you learn! What topic shall we explore next?";
+    let rawOutput = response.text?.trim();
+    if (!rawOutput) {
+      res.status(502).json({
+        error: 'The AI service returned an empty response. Please try again.',
+      });
+      return;
+    }
 
     // 6. Check for memory suggestion pattern
     let memorySuggestion: string | undefined = undefined;
@@ -232,34 +241,10 @@ chatRouter.post('/chat', requireAuth, async (req: AuthenticatedRequest, res: Res
       assistantMessage: assistantMsg,
     });
   } catch (err: any) {
-    console.error('Error generating chat response, generating fallback answer:', err);
-    const fallbackContent = `# StudySphere Academic Guide: ${message.slice(0, 60)}
-
-### Core Conceptual Foundation
-Here is a comprehensive breakdown calibrated for your learning session:
-* **Fundamental Principles**: Deconstructing the problem into clear, verifiable components and boundary constraints.
-* **Key Mechanism**: Applying systematic methods to optimize throughput, accuracy, and structural invariance.
-* **Practical Application**: Real-world scenarios benefit directly from rigorous formulation and consistent testing.
-
-### Check For Understanding
-1. What core trade-off governs performance versus latency in this domain?
-2. How would you validate edge-case stability under heavy load?
-
-*(Synthesized by StudySphere Knowledge Engine)*`;
-
-    const assistantMsg: ChatMessage = {
-      id: `msg-${Date.now()}-a-fallback`,
-      conversationId: conv.id,
-      role: 'assistant',
-      content: fallbackContent,
-      timestamp: new Date().toISOString(),
-    };
-    db.addMessage(conv.id, assistantMsg);
-
-    res.status(200).json({
-      conversationId: conv.id,
-      userMessage: userMsg,
-      assistantMessage: assistantMsg,
+    console.error('Error generating chat response with Gemini API:', err);
+    res.status(503).json({
+      error: 'The AI service is temporarily unavailable. Please try again.',
+      details: err?.message || undefined,
     });
   }
 });
@@ -406,6 +391,9 @@ chatRouter.post('/chat/stream', requireAuth, async (req: AuthenticatedRequest, r
       config: {
         systemInstruction,
         temperature: 0.7,
+        thinkingConfig: {
+          thinkingBudget: 0,
+        },
       },
     });
 
@@ -419,8 +407,12 @@ chatRouter.post('/chat/stream', requireAuth, async (req: AuthenticatedRequest, r
       }
     }
 
-    if (!fullOutput) {
-      fullOutput = "I'm ready to help you learn! What topic shall we explore next?";
+    if (!fullOutput.trim()) {
+      if (!isClosed) {
+        res.write(`event: error\ndata: ${JSON.stringify({ error: 'The AI service returned an empty response. Please try again.' })}\n\n`);
+        res.end();
+      }
+      return;
     }
 
     // Check for memory suggestion pattern

@@ -89,7 +89,7 @@ export default function App() {
 
       // 2. Load conversations, documents, memories
       await Promise.all([
-        refreshConversations(),
+        refreshConversations(true),
         refreshDocuments(),
         refreshMemories(),
       ]);
@@ -98,11 +98,11 @@ export default function App() {
     }
   };
 
-  const refreshConversations = async () => {
+  const refreshConversations = async (autoSelectFirst = false) => {
     try {
       const convList = await api.getConversations();
       setConversations(convList);
-      if (convList.length > 0 && !activeConversationId) {
+      if (autoSelectFirst && convList.length > 0 && !activeConversationId) {
         selectConversation(convList[0].id);
       }
     } catch (err) {
@@ -229,17 +229,27 @@ export default function App() {
           knowledgeLevel: payload.knowledgeLevel,
         },
         {
-          onInit: async data => {
-            if (!activeConversationId || activeConversationId !== data.conversationId) {
-              setActiveConversationId(data.conversationId);
-              await refreshConversations();
-              const convDetails = await api.getConversation(data.conversationId);
-              setActiveConversation(convDetails.conversation);
-            }
+          onInit: data => {
+            setActiveConversationId(data.conversationId);
+            setActiveConversation(prev => {
+              if (prev && prev.id === data.conversationId) return prev;
+              return {
+                id: data.conversationId,
+                userId: currentUser?.id || 'usr-student-01',
+                title: payload.message.slice(0, 45) + (payload.message.length > 45 ? '...' : ''),
+                learningMode: (payload.learningMode as Conversation['learningMode']) || 'general',
+                documentId: payload.documentId,
+                language: selectedLanguage,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+              };
+            });
             // Update user message id
             setMessages(prev =>
               prev.map(m => (m.id === tempUserMsgId ? data.userMessage : m))
             );
+            // Non-blocking background fetch of conversation list
+            api.getConversations().then(list => setConversations(list)).catch(() => {});
           },
           onChunk: chunkText => {
             accumulatedText += chunkText;
@@ -259,6 +269,8 @@ export default function App() {
                   : m
               )
             );
+            // Non-blocking background refresh to update timestamps & titles
+            api.getConversations().then(list => setConversations(list)).catch(() => {});
           },
           onError: err => {
             console.error('Stream error:', err);
@@ -523,6 +535,8 @@ export default function App() {
               currentUser={currentUser}
               selectedLanguage={selectedLanguage}
               onSelectLanguage={setSelectedLanguage}
+              darkMode={darkMode}
+              onToggleDarkMode={() => setDarkMode(!darkMode)}
               onRefreshUser={initApp}
               onLogout={() => {
                 api.logout();

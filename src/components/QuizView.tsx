@@ -181,7 +181,6 @@ export const QuizView: React.FC<QuizViewProps> = ({
 
       const fallbackQuiz: Quiz = {
         id: `quiz-client-${Date.now()}`,
-        userId: 'usr-student-01',
         title: `${effectiveTopic || 'Academic'} Mastery Diagnostic Quiz`,
         topic: effectiveTopic || 'Academic Topic',
         documentId: selectedDocId || undefined,

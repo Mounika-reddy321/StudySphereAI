@@ -148,10 +148,11 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Dark Mode Toggle */}
         <button
           onClick={onToggleDarkMode}
-          className="p-2 text-[#517c8d] hover:text-[#1b4356] dark:text-slate-400 dark:hover:text-slate-100 rounded-xl bg-white/80 hover:bg-white dark:bg-slate-800 transition border border-[#b2e8e4] dark:border-slate-700 shadow-2xs"
+          className="p-2 text-[#517c8d] hover:text-[#1b4356] dark:text-slate-300 dark:hover:text-white rounded-xl bg-white/80 hover:bg-white dark:bg-slate-800 dark:hover:bg-slate-700 transition border border-[#b2e8e4] dark:border-slate-700 shadow-2xs cursor-pointer flex items-center justify-center"
           title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+          aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
         >
-          {darkMode ? <Sun className="w-4 h-4 text-sky-400" /> : <Moon className="w-4 h-4" />}
+          {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-[#1e3a8a]" />}
         </button>
 
         {/* User Account Button */}

@@ -328,7 +328,25 @@ export const ChatView: React.FC<ChatViewProps> = ({
                         {isUser ? (
                           <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
                         ) : (
-                          <MarkdownRenderer content={msg.content} />
+                          <>
+                            {msg.content ? (
+                              <div className="relative">
+                                <MarkdownRenderer content={msg.content} />
+                                {isLoading && isLastAssistant && (
+                                  <span className="inline-block w-2 h-4 ml-1.5 bg-[#1e3a8a] dark:bg-sky-400 animate-pulse align-middle rounded-xs" />
+                                )}
+                              </div>
+                            ) : (
+                              <div className="flex items-center gap-2.5 py-1 text-xs text-[#517c8d] dark:text-slate-400 font-medium">
+                                <div className="flex gap-1 items-center">
+                                  <span className="w-2 h-2 rounded-full bg-[#1e3a8a] dark:bg-sky-400 animate-bounce" />
+                                  <span className="w-2 h-2 rounded-full bg-[#1e3a8a] dark:bg-sky-400 animate-bounce [animation-delay:0.15s]" />
+                                  <span className="w-2 h-2 rounded-full bg-[#1e3a8a] dark:bg-sky-400 animate-bounce [animation-delay:0.3s]" />
+                                </div>
+                                <span className="text-xs text-[#1e3a8a] dark:text-sky-300 font-semibold">Generating answer...</span>
+                              </div>
+                            )}
+                          </>
                         )}
 
                         {/* Citations Pill from Document RAG */}
@@ -415,18 +433,18 @@ export const ChatView: React.FC<ChatViewProps> = ({
               );
             })}
 
-            {/* Loading Indicator */}
-            {isLoading && (
+            {/* Loading Indicator (shown only before assistant message bubble appears) */}
+            {isLoading && (messages.length === 0 || messages[messages.length - 1].role === 'user') && (
               <div className="flex flex-col items-start space-y-1">
-                <span className="text-[11px] font-bold text-[#517c8d] px-1">
+                <span className="text-[11px] font-bold text-[#517c8d] dark:text-slate-400 px-1">
                   StudySphere AI is thinking...
                 </span>
-                <div className="rounded-2xl p-4 bg-white dark:bg-slate-900 border border-[#b2e8e4] dark:border-slate-800 flex items-center gap-2.5 shadow-sm">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a] animate-bounce" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a] animate-bounce [animation-delay:0.2s]" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a] animate-bounce [animation-delay:0.4s]" />
+                <div className="rounded-2xl p-3.5 bg-white dark:bg-slate-900 border border-[#b2e8e4] dark:border-slate-800 flex items-center gap-2.5 shadow-sm">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a] dark:bg-sky-400 animate-bounce" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a] dark:bg-sky-400 animate-bounce [animation-delay:0.2s]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a] dark:bg-sky-400 animate-bounce [animation-delay:0.4s]" />
                   <span className="text-xs text-[#517c8d] dark:text-slate-400 font-semibold pl-1">
-                    Analyzing concepts & formulating explanation...
+                    Analyzing concepts & preparing response...
                   </span>
                 </div>
               </div>
@@ -478,7 +496,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
             <div className="flex flex-wrap items-center gap-2">
               {/* Learning Mode selector */}
               <div className="flex items-center bg-white/90 dark:bg-slate-800 rounded-xl px-2.5 py-1.5 border border-[#b2e8e4] dark:border-slate-700/60 shadow-2xs">
-                <BookOpen className="w-3.5 h-3.5 text-[#ff765e] mr-1.5" />
+                <BookOpen className="w-3.5 h-3.5 text-[#1e3a8a] dark:text-sky-400 mr-1.5" />
                 <span className="text-[11px] font-bold text-[#517c8d] mr-1">Mode:</span>
                 <select
                   value={learningMode}
@@ -497,7 +515,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
               {/* Grounding Document selector */}
               {documents.length > 0 && (
                 <div className="flex items-center bg-white/90 dark:bg-slate-800 rounded-xl px-2.5 py-1.5 border border-[#b2e8e4] dark:border-slate-700/60 shadow-2xs">
-                  <FileText className="w-3.5 h-3.5 text-[#308197] mr-1.5" />
+                  <FileText className="w-3.5 h-3.5 text-[#1e3a8a] dark:text-sky-400 mr-1.5" />
                   <span className="text-[11px] font-bold text-[#517c8d] mr-1">Doc:</span>
                   <select
                     value={selectedDocId}
@@ -524,7 +542,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                   onClick={() => setKnowledgeLevel(lvl)}
                   className={`px-2.5 py-1 rounded-xl text-[10px] font-bold transition shadow-2xs ${
                     knowledgeLevel === lvl
-                      ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white shadow-[#f4624b]/20'
+                      ? 'bg-gradient-to-r from-[#0f2b48] to-[#1e3a8a] text-white shadow-blue-950/20'
                       : 'bg-white/80 dark:bg-slate-800 text-[#517c8d] hover:bg-white border border-[#b2e8e4]'
                   }`}
                 >
@@ -543,7 +561,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
               onChange={handleTextareaInput}
               onKeyDown={handleKeyDown}
               placeholder="Ask anything, request an explanation, or upload study notes... (Shift+Enter for newline)"
-              className="w-full pl-4 pr-24 py-3.5 bg-white dark:bg-slate-800/90 border-2 border-[#b2e8e4] focus:border-[#ff765e] rounded-2xl text-sm text-[#1b4356] dark:text-white placeholder:text-[#517c8d]/60 focus:outline-none focus:ring-4 focus:ring-[#ff765e]/15 resize-none transition shadow-sm leading-relaxed max-h-48"
+              className="w-full pl-4 pr-24 py-3.5 bg-white dark:bg-slate-800/90 border-2 border-[#b2e8e4] focus:border-[#1e3a8a] rounded-2xl text-sm text-[#1b4356] dark:text-white placeholder:text-[#517c8d]/60 focus:outline-none focus:ring-4 focus:ring-blue-900/15 resize-none transition shadow-sm leading-relaxed max-h-48"
             />
 
             <div className="absolute right-2.5 bottom-2.5 flex items-center gap-1.5">
@@ -562,7 +580,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                   disabled={!inputText.trim()}
                   className={`p-2.5 rounded-xl transition shadow-md ${
                     inputText.trim()
-                      ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#f8674f] hover:to-[#e65239] text-white shadow-[#f4624b]/25 hover:scale-105'
+                      ? 'bg-gradient-to-r from-[#0f2b48] to-[#1e3a8a] hover:from-[#091b2e] hover:to-[#172e73] text-white shadow-blue-950/25 hover:scale-105'
                       : 'bg-[#bfeae6] dark:bg-slate-700 text-[#517c8d]/60 cursor-not-allowed'
                   }`}
                   title="Send message"

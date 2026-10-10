@@ -12,6 +12,8 @@ import {
   ToggleRight,
   User as UserIcon,
   HelpCircle,
+  Moon,
+  Sun,
 } from 'lucide-react';
 import { User } from '../types/index.js';
 import { api } from '../services/api.js';
@@ -20,6 +22,8 @@ interface SettingsViewProps {
   currentUser: User | null;
   selectedLanguage: string;
   onSelectLanguage: (lang: string) => void;
+  darkMode?: boolean;
+  onToggleDarkMode?: () => void;
   onRefreshUser: () => void;
   onLogout: () => void;
 }
@@ -28,6 +32,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   currentUser,
   selectedLanguage,
   onSelectLanguage,
+  darkMode = false,
+  onToggleDarkMode,
   onRefreshUser,
   onLogout,
 }) => {
@@ -122,7 +128,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         {/* Header */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/80 dark:bg-sky-950/70 text-[#1b4356] dark:text-sky-300 border border-[#b2e8e4] dark:border-sky-800/60 mb-1 shadow-xs">
-            <Settings className="w-3.5 h-3.5 text-[#ff765e]" />
+            <Settings className="w-3.5 h-3.5 text-[#1e3a8a] dark:text-sky-400" />
             <span>Preferences & Data Governance</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1b4356] dark:text-white tracking-tight">
@@ -137,7 +143,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         {currentUser && (
           <div className="bg-white/95 dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-[#b2e8e4] dark:border-slate-800 shadow-md space-y-5">
             <h3 className="text-sm font-bold text-[#1b4356] dark:text-white uppercase tracking-wider flex items-center gap-2">
-              <UserIcon className="w-4 h-4 text-[#ff765e]" />
+              <UserIcon className="w-4 h-4 text-[#1e3a8a] dark:text-sky-400" />
               <span>Student Profile</span>
             </h3>
 
@@ -151,7 +157,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                     type="text"
                     value={name}
                     onChange={e => setName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-[#f0faf9] dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs sm:text-sm text-[#1b4356] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#ff765e]"
+                    className="w-full px-3.5 py-2.5 bg-[#f0faf9] dark:bg-slate-800 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-xs sm:text-sm text-[#1b4356] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a]"
                     required
                   />
                 </div>
@@ -179,7 +185,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 <button
                   type="submit"
                   disabled={isSaving}
-                  className="px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#ff856f] hover:to-[#f87158] text-white shadow-xs"
+                  className="px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#0f2b48] to-[#1e3a8a] hover:from-[#163b63] hover:to-[#1e40af] text-white shadow-xs cursor-pointer"
                 >
                   {isSaving ? 'Saving...' : 'Save Profile Changes'}
                 </button>
@@ -188,14 +194,72 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </div>
         )}
 
+        {/* Appearance & Theme (Dark / Light Mode) */}
+        <div className="bg-white/95 dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-[#b2e8e4] dark:border-slate-800 shadow-md space-y-4">
+          <h3 className="text-sm font-bold text-[#1b4356] dark:text-white uppercase tracking-wider flex items-center gap-2">
+            {darkMode ? <Moon className="w-4 h-4 text-sky-400" /> : <Sun className="w-4 h-4 text-[#1e3a8a]" />}
+            <span>Appearance & Theme</span>
+          </h3>
+
+          <p className="text-xs text-[#4d7a8d] dark:text-slate-400 leading-relaxed">
+            Choose your interface display preference. Dark mode optimizes contrast for late-night study sessions while Light mode offers crisp daylight clarity.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <button
+              onClick={() => {
+                if (darkMode && onToggleDarkMode) onToggleDarkMode();
+              }}
+              className={`p-4 rounded-2xl border text-left transition cursor-pointer ${
+                !darkMode
+                  ? 'border-[#1e3a8a] bg-[#daf4f1] ring-2 ring-[#1e3a8a] text-[#1b4356]'
+                  : 'border-[#b2e8e4] dark:border-slate-800 hover:border-[#1e3a8a]/50 text-[#1b4356] dark:text-slate-300 bg-white/70 dark:bg-slate-800/60'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 font-bold text-xs sm:text-sm">
+                  <Sun className="w-4 h-4 text-amber-500" />
+                  <span>Light Mode</span>
+                </div>
+                {!darkMode && <Check className="w-4 h-4 text-[#1e3a8a]" />}
+              </div>
+              <span className="text-[11px] text-[#4d7a8d] dark:text-slate-400 mt-1 block">
+                Fresh pastel daylight theme with sky accents
+              </span>
+            </button>
+
+            <button
+              onClick={() => {
+                if (!darkMode && onToggleDarkMode) onToggleDarkMode();
+              }}
+              className={`p-4 rounded-2xl border text-left transition cursor-pointer ${
+                darkMode
+                  ? 'border-sky-500 bg-slate-800 ring-2 ring-sky-500 text-white'
+                  : 'border-[#b2e8e4] dark:border-slate-800 hover:border-sky-500/50 text-[#1b4356] dark:text-slate-300 bg-white/70 dark:bg-slate-800/60'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 font-bold text-xs sm:text-sm">
+                  <Moon className="w-4 h-4 text-sky-400" />
+                  <span>Dark Mode</span>
+                </div>
+                {darkMode && <Check className="w-4 h-4 text-sky-400" />}
+              </div>
+              <span className="text-[11px] text-[#4d7a8d] dark:text-slate-400 mt-1 block">
+                Deep obsidian & slate theme for focused nighttime learning
+              </span>
+            </button>
+          </div>
+        </div>
+
         {/* Multilingual Support Settings */}
         <div className="bg-white/95 dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-[#b2e8e4] dark:border-slate-800 shadow-md space-y-4">
           <h3 className="text-sm font-bold text-[#1b4356] dark:text-white uppercase tracking-wider flex items-center gap-2">
-            <Globe className="w-4 h-4 text-[#ff765e]" />
+            <Globe className="w-4 h-4 text-[#1e3a8a] dark:text-sky-400" />
             <span>Explanation Language (Multilingual Support)</span>
           </h3>
 
-          <p className="text-xs text-[#4d7a8d] leading-relaxed">
+          <p className="text-xs text-[#4d7a8d] dark:text-slate-400 leading-relaxed">
             Choose your preferred language for explanations, quiz questions, and study plans. Programming code syntax and technical formulas remain standard while explanations adapt fluently.
           </p>
 
@@ -211,15 +275,15 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 onClick={() => onSelectLanguage(lang.code)}
                 className={`p-4 rounded-2xl border text-left transition ${
                   selectedLanguage === lang.code
-                    ? 'border-[#ff765e] bg-[#daf4f1] dark:bg-sky-950/40 ring-1 ring-[#ff765e] text-[#1b4356] dark:text-sky-200'
-                    : 'border-[#b2e8e4] dark:border-slate-800 hover:border-[#ff765e]/50 text-[#1b4356] dark:text-slate-300 bg-white/70'
+                    ? 'border-[#1e3a8a] bg-[#daf4f1] dark:bg-sky-950/40 ring-1 ring-[#1e3a8a] text-[#1b4356] dark:text-sky-200'
+                    : 'border-[#b2e8e4] dark:border-slate-800 hover:border-[#1e3a8a]/50 text-[#1b4356] dark:text-slate-300 bg-white/70'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-xs sm:text-sm">{lang.title}</span>
-                  {selectedLanguage === lang.code && <Check className="w-4 h-4 text-[#ff765e]" />}
+                  {selectedLanguage === lang.code && <Check className="w-4 h-4 text-[#1e3a8a]" />}
                 </div>
-                <span className="text-[11px] text-[#4d7a8d] mt-1 block">{lang.desc}</span>
+                <span className="text-[11px] text-[#4d7a8d] dark:text-slate-400 mt-1 block">{lang.desc}</span>
               </button>
             ))}
           </div>
@@ -228,7 +292,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         {/* AI & Model Architecture Details */}
         <div className="bg-white/95 dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-[#b2e8e4] dark:border-slate-800 shadow-md space-y-4">
           <h3 className="text-sm font-bold text-[#1b4356] dark:text-white uppercase tracking-wider flex items-center gap-2">
-            <Cpu className="w-4 h-4 text-[#ff765e]" />
+            <Cpu className="w-4 h-4 text-[#1e3a8a] dark:text-sky-400" />
             <span>AI Architecture & Model Configuration</span>
           </h3>
 
@@ -236,7 +300,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             <div className="flex items-center justify-between p-3 rounded-xl bg-[#f0faf9] dark:bg-slate-800/60 border border-[#b2e8e4]/60 dark:border-slate-800">
               <span className="text-[#4d7a8d]">Conversational & Reasoning Model:</span>
               <span className="font-mono font-bold text-[#1b4356] dark:text-slate-200">
-                gemini-3.8-flash
+                gemini-3.1-flash-lite (Instant Claude-like streaming)
               </span>
             </div>
             <div className="flex items-center justify-between p-3 rounded-xl bg-[#f0faf9] dark:bg-slate-800/60 border border-[#b2e8e4]/60 dark:border-slate-800">
@@ -257,7 +321,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         {/* Data Ownership & Account Deletion */}
         <div className="bg-white/95 dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-[#b2e8e4] dark:border-slate-800 shadow-md space-y-4">
           <h3 className="text-sm font-bold text-[#1b4356] dark:text-white uppercase tracking-wider flex items-center gap-2">
-            <Shield className="w-4 h-4 text-[#ff765e]" />
+            <Shield className="w-4 h-4 text-[#1e3a8a] dark:text-sky-400" />
             <span>Data Sovereignty & Privacy Controls</span>
           </h3>
 
