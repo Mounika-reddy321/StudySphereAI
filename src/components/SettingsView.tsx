@@ -34,8 +34,14 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   const [name, setName] = useState(currentUser?.name || '');
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
 
   const memoryEnabled = currentUser?.enableMemory ?? true;
+
+  const showStatus = (text: string, type: 'success' | 'error' = 'success') => {
+    setStatusMessage({ text, type });
+    setTimeout(() => setStatusMessage(null), 3000);
+  };
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,10 +51,11 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
     try {
       await api.updateProfile({ name: name.trim() });
       setSaveSuccess(true);
+      showStatus('Profile updated successfully!');
       setTimeout(() => setSaveSuccess(false), 2500);
       onRefreshUser();
     } catch (err: any) {
-      alert(`Failed to update profile: ${err.message}`);
+      showStatus(`Failed to update profile: ${err.message}`, 'error');
     } finally {
       setIsSaving(false);
     }
@@ -57,9 +64,10 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   const handleToggleMemory = async () => {
     try {
       await api.updateProfile({ enableMemory: !memoryEnabled });
+      showStatus(!memoryEnabled ? 'Adaptive memory enabled' : 'Adaptive memory disabled');
       onRefreshUser();
     } catch (err: any) {
-      alert(`Failed to toggle memory: ${err.message}`);
+      showStatus(`Failed to toggle memory: ${err.message}`, 'error');
     }
   };
 
@@ -92,24 +100,19 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       a.download = `studysphere-backup-${Date.now()}.json`;
       a.click();
       URL.revokeObjectURL(url);
+      showStatus('Export downloaded successfully!');
     } catch (err: any) {
-      alert(`Failed to export data: ${err.message}`);
+      showStatus(`Failed to export data: ${err.message}`, 'error');
     }
   };
 
   const handleDeleteAccount = async () => {
-    const confirmation = prompt(
-      'WARNING: This will permanently delete your account, conversations, documents, memories, and quiz history.\n\nType "DELETE" to confirm:'
-    );
-
-    if (confirmation === 'DELETE') {
-      try {
-        await api.deleteAccount();
-        alert('Your account and all associated data have been deleted.');
-        onLogout();
-      } catch (err: any) {
-        alert(`Deletion failed: ${err.message}`);
-      }
+    try {
+      await api.deleteAccount();
+      showStatus('Your account and all associated data have been deleted.');
+      onLogout();
+    } catch (err: any) {
+      showStatus(`Deletion failed: ${err.message}`, 'error');
     }
   };
 

@@ -9,6 +9,8 @@ import { QuizView } from './components/QuizView.js';
 import { PlannerView } from './components/PlannerView.js';
 import { AnalyticsView } from './components/AnalyticsView.js';
 import { SettingsView } from './components/SettingsView.js';
+import { ResumeView } from './components/ResumeView.js';
+import { PresentationView } from './components/PresentationView.js';
 import { AuthModal } from './components/AuthModal.js';
 import { api, getStoredToken } from './services/api.js';
 import {
@@ -55,6 +57,7 @@ export default function App() {
   // Cross-view bridge props
   const [quizPrefillTopic, setQuizPrefillTopic] = useState('');
   const [quizPrefillDocId, setQuizPrefillDocId] = useState('');
+  const [pptPrefillTopic, setPptPrefillTopic] = useState('');
 
   // Initial load
   useEffect(() => {
@@ -351,6 +354,7 @@ export default function App() {
     setQuizPrefillTopic(topic);
     setQuizPrefillDocId('');
     setActiveTab('quizzes');
+    showToast(`Topic "${topic}" loaded in Quiz Generator!`);
   };
 
   const handleStartChatWithDocument = (docId: string, docTitle: string) => {
@@ -365,6 +369,7 @@ export default function App() {
     setQuizPrefillTopic(docTitle);
     setQuizPrefillDocId(docId);
     setActiveTab('quizzes');
+    showToast(`Document "${docTitle}" selected for Quiz generation!`);
   };
 
   const handleOpenChatWithPrompt = (prompt: string, mode: string) => {
@@ -376,7 +381,7 @@ export default function App() {
   };
 
   return (
-    <div className={`h-screen w-screen flex overflow-hidden bg-[#cbeeee] dark:bg-slate-950 text-[#1b4356] dark:text-slate-100 font-sans selection:bg-[#ff765e] selection:text-white ${darkMode ? 'dark' : ''}`}>
+    <div className={`h-screen w-screen flex overflow-hidden bg-[#cbeeee] dark:bg-slate-950 text-[#1b4356] dark:text-slate-100 font-sans selection:bg-[#1e3a8a] selection:text-white ${darkMode ? 'dark' : ''}`}>
       {/* Sidebar */}
       <Sidebar
         activeTab={activeTab}
@@ -437,6 +442,10 @@ export default function App() {
             <LearningModeView
               selectedLanguage={selectedLanguage}
               onStartQuizOnTopic={handleStartQuizOnTopic}
+              onStartPresentationOnTopic={(topic: string) => {
+                setPptPrefillTopic(topic);
+                setActiveTab('ppt');
+              }}
               onOpenChatWithPrompt={handleOpenChatWithPrompt}
             />
           )}
@@ -472,6 +481,23 @@ export default function App() {
               prefilledTopic={quizPrefillTopic}
               prefilledDocId={quizPrefillDocId}
               onRefreshQuizzes={() => {}}
+              onNavigateToTab={setActiveTab}
+            />
+          )}
+
+          {activeTab === 'resume' && (
+            <ResumeView
+              currentUser={currentUser}
+              documents={documents}
+              onNavigateToTab={setActiveTab}
+            />
+          )}
+
+          {activeTab === 'ppt' && (
+            <PresentationView
+              currentUser={currentUser}
+              documents={documents}
+              prefilledTopic={pptPrefillTopic}
               onNavigateToTab={setActiveTab}
             />
           )}

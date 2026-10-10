@@ -10,6 +10,8 @@ import { documentRouter } from './server/routes/documentRoutes.js';
 import { quizRouter } from './server/routes/quizRoutes.js';
 import { plannerRouter } from './server/routes/plannerRoutes.js';
 import { analyticsRouter } from './server/routes/analyticsRoutes.js';
+import { resumeRouter } from './server/routes/resumeRoutes.js';
+import { pptRouter } from './server/routes/pptRoutes.js';
 
 dotenv.config();
 
@@ -38,6 +40,8 @@ app.use('/api', chatRouter);
 app.use('/api/quizzes', quizRouter);
 app.use('/api/study-plans', plannerRouter);
 app.use('/api/analytics', analyticsRouter);
+app.use('/api/resumes', resumeRouter);
+app.use('/api/presentations', pptRouter);
 
 async function startServer() {
   const isProduction = process.env.NODE_ENV === 'production';

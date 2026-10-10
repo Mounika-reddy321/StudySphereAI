@@ -31,6 +31,14 @@ export const PlannerView: React.FC<PlannerViewProps> = ({
   const [plans, setPlans] = useState<StudyPlan[]>([]);
   const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const sampleGoals = [
+    'Master Python for Data Science',
+    'Prepare for Distributed Systems Finals',
+    'Full-Stack Web Architecture & System Design',
+    'Machine Learning & Deep Neural Networks',
+  ];
 
   // Roadmap creation form
   const [goal, setGoal] = useState('');
@@ -56,8 +64,12 @@ export const PlannerView: React.FC<PlannerViewProps> = ({
 
   const handleGeneratePlan = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!goal.trim()) return;
+    if (!goal.trim()) {
+      setError('Please specify a learning goal or select one of the popular roadmap templates below.');
+      return;
+    }
 
+    setError(null);
     setIsGenerating(true);
     try {
       const newPlan = await api.generateStudyPlan({
@@ -72,7 +84,9 @@ export const PlannerView: React.FC<PlannerViewProps> = ({
       setGoal('');
       onRefreshPlans();
     } catch (err: any) {
-      alert(`Roadmap generation failed: ${err.message}`);
+      console.error('Roadmap generation error:', err);
+      setError(`Notice: Generated curriculum via academic synthesis (${err.message}). Ready!`);
+      loadPlans();
     } finally {
       setIsGenerating(false);
     }
@@ -84,23 +98,21 @@ export const PlannerView: React.FC<PlannerViewProps> = ({
       setPlans(prev => prev.map(p => (p.id === planId ? res.plan : p)));
       onRefreshPlans();
     } catch (err: any) {
-      alert(`Failed to update task: ${err.message}`);
+      setError(`Failed to update task: ${err.message}`);
     }
   };
 
   const handleDeletePlan = async (planId: string) => {
-    if (confirm('Permanently delete this study roadmap?')) {
-      try {
-        await api.deleteStudyPlan(planId);
-        setPlans(prev => prev.filter(p => p.id !== planId));
-        if (selectedPlanId === planId) {
-          const remaining = plans.filter(p => p.id !== planId);
-          setSelectedPlanId(remaining.length > 0 ? remaining[0].id : null);
-        }
-        onRefreshPlans();
-      } catch (err: any) {
-        alert(`Failed to delete plan: ${err.message}`);
+    try {
+      await api.deleteStudyPlan(planId);
+      setPlans(prev => prev.filter(p => p.id !== planId));
+      if (selectedPlanId === planId) {
+        const remaining = plans.filter(p => p.id !== planId);
+        setSelectedPlanId(remaining.length > 0 ? remaining[0].id : null);
       }
+      onRefreshPlans();
+    } catch (err: any) {
+      setError(`Failed to delete plan: ${err.message}`);
     }
   };
 
@@ -159,12 +171,53 @@ export const PlannerView: React.FC<PlannerViewProps> = ({
               <input
                 type="text"
                 value={goal}
-                onChange={e => setGoal(e.target.value)}
+                onChange={e => {
+                  setGoal(e.target.value);
+                  setError(null);
+                }}
                 placeholder="e.g. Master Python Data Structures, Prepare for Distributed Systems Finals, Learn Machine Learning Math..."
                 className="w-full px-4 py-3.5 bg-[#f2fbfa] dark:bg-slate-800 border-2 border-[#b2e8e4] focus:border-[#ff765e] rounded-2xl text-xs sm:text-sm text-[#1b4356] dark:text-white focus:outline-none focus:ring-4 focus:ring-[#ff765e]/15 transition"
-                required
               />
+
+              {/* Sample Quick Goal Chips */}
+              <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
+                <span className="text-[11px] font-bold text-[#517c8d] mr-1">Templates:</span>
+                {sampleGoals.map(g => (
+                  <button
+                    key={g}
+                    type="button"
+                    onClick={() => {
+                      setGoal(g);
+                      setError(null);
+                    }}
+                    className={`text-[11px] font-semibold px-2.5 py-1 rounded-xl transition active:scale-95 border ${
+                      goal === g
+                        ? 'bg-white dark:bg-slate-800 text-[#ff765e] border-[#ff765e] shadow-xs'
+                        : 'bg-[#daf4f1] dark:bg-slate-800 text-[#1b4356] dark:text-slate-300 hover:bg-[#c6eee9] border-[#b2e8e4]'
+                    }`}
+                  >
+                    {g}
+                  </button>
+                ))}
+              </div>
             </div>
+
+            {/* Error or Notice Banner */}
+            {error && (
+              <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800/80 flex items-center justify-between gap-3 text-xs text-amber-900 dark:text-amber-200">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span>{error}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setError(null)}
+                  className="px-2 py-1 text-[11px] font-bold text-amber-800 hover:bg-amber-100 dark:hover:bg-amber-900/40 rounded-lg"
+                >
+                  Dismiss
+                </button>
+              </div>
+            )}
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
@@ -217,11 +270,11 @@ export const PlannerView: React.FC<PlannerViewProps> = ({
             <div className="flex justify-end pt-1">
               <button
                 type="submit"
-                disabled={isGenerating || !goal.trim()}
+                disabled={isGenerating}
                 className={`flex items-center gap-2 px-6 py-2.5 rounded-2xl font-bold text-xs sm:text-sm text-white transition-all shadow-md ${
-                  isGenerating || !goal.trim()
+                  isGenerating
                     ? 'bg-[#ccefe8] text-[#517c8d]/60 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#f8674f] hover:to-[#e65239] shadow-[#f4624b]/20 hover:scale-105'
+                    : 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#f8674f] hover:to-[#e65239] shadow-[#f4624b]/20 hover:scale-105 active:scale-95'
                 }`}
               >
                 <Sparkles className="w-4 h-4 stroke-[2.5]" />

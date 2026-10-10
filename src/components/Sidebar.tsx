@@ -19,6 +19,8 @@ import {
   User as UserIcon,
   LogOut,
   Sparkles,
+  Briefcase,
+  Presentation,
 } from 'lucide-react';
 import { ActiveTab, Conversation, User } from '../types/index.js';
 import { Logo } from './Logo.js';
@@ -87,18 +89,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   const handleDelete = (c: Conversation, e: React.MouseEvent) => {
     e.stopPropagation();
-    if (confirm(`Delete conversation "${c.title}"?`)) {
-      onDeleteConversation(c.id);
-    }
+    onDeleteConversation(c.id);
   };
 
   const navItems = [
     { id: 'chat' as ActiveTab, label: 'AI Chat', icon: MessageSquare },
     { id: 'learning-mode' as ActiveTab, label: 'My Learning', icon: BookOpen },
-    { id: 'documents' as ActiveTab, label: 'Study Materials', icon: FileText },
-    { id: 'memories' as ActiveTab, label: 'My Memories', icon: Brain },
     { id: 'quizzes' as ActiveTab, label: 'Quizzes', icon: HelpCircle },
+    { id: 'resume' as ActiveTab, label: 'Resume Builder', icon: Briefcase },
+    { id: 'ppt' as ActiveTab, label: 'PPT & Slides', icon: Presentation },
+    { id: 'documents' as ActiveTab, label: 'Study Materials', icon: FileText },
     { id: 'planner' as ActiveTab, label: 'Study Planner', icon: Calendar },
+    { id: 'memories' as ActiveTab, label: 'My Memories', icon: Brain },
     { id: 'analytics' as ActiveTab, label: 'Progress', icon: BarChart3 },
     { id: 'settings' as ActiveTab, label: 'Settings', icon: Settings },
   ];
@@ -132,8 +134,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
           }}
           className={`w-full flex items-center justify-center gap-2 py-2.5 px-3.5 rounded-2xl font-bold text-sm transition-all shadow-md ${
             isCollapsed
-              ? 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] text-white shadow-[#f4624b]/20'
-              : 'bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#f8674f] hover:to-[#e65239] text-white shadow-[#f4624b]/25 hover:shadow-lg hover:-translate-y-0.5'
+              ? 'bg-gradient-to-r from-[#0f2b48] to-[#1e3a8a] text-white shadow-blue-950/20'
+              : 'bg-gradient-to-r from-[#0f2b48] to-[#1e3a8a] hover:from-[#163b63] hover:to-[#1e40af] text-white shadow-blue-950/25 hover:shadow-lg hover:-translate-y-0.5'
           }`}
           title="Start a fresh learning session"
         >
@@ -156,12 +158,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
               }}
               className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
                 isActive
-                  ? 'bg-white dark:bg-slate-800 text-[#1b4356] dark:text-white shadow-xs border border-[#a6e2de] dark:border-slate-700'
-                  : 'text-[#416f82] dark:text-slate-400 hover:bg-[#d0f1ee]/80 dark:hover:bg-slate-800/60 hover:text-[#1b4356] dark:hover:text-slate-200'
+                  ? 'bg-white dark:bg-slate-800 text-[#0f2b48] dark:text-white shadow-xs border border-[#a6e2de] dark:border-slate-700'
+                  : 'text-[#416f82] dark:text-slate-400 hover:bg-[#d0f1ee]/80 dark:hover:bg-slate-800/60 hover:text-[#0f2b48] dark:hover:text-slate-200'
               }`}
               title={item.label}
             >
-              <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-[#ff765e] dark:text-[#ff765e]' : ''}`} />
+              <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-[#1e3a8a] dark:text-sky-400' : ''}`} />
               {!isCollapsed && <span>{item.label}</span>}
             </button>
           );
@@ -190,7 +192,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   placeholder="Search conversations..."
                   value={searchConv}
                   onChange={e => setSearchConv(e.target.value)}
-                  className="w-full pl-8 pr-2.5 py-1.5 text-xs bg-white/90 dark:bg-slate-800/80 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-[#1b4356] dark:text-slate-200 placeholder:text-[#517c8d]/70 focus:outline-none focus:ring-2 focus:ring-[#ff765e]/40"
+                  className="w-full pl-8 pr-2.5 py-1.5 text-xs bg-white/90 dark:bg-slate-800/80 border border-[#b2e8e4] dark:border-slate-700 rounded-xl text-[#1b4356] dark:text-slate-200 placeholder:text-[#517c8d]/70 focus:outline-none focus:ring-2 focus:ring-[#1e3a8a]/30 focus:border-[#1e3a8a]"
                 />
               </div>
             </div>
@@ -228,7 +230,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                           type="text"
                           value={editTitle}
                           onChange={e => setEditTitle(e.target.value)}
-                          className="flex-1 bg-white dark:bg-slate-900 text-xs px-2 py-1 border border-[#ff765e] rounded-lg focus:outline-none text-[#1b4356]"
+                          className="flex-1 bg-white dark:bg-slate-900 text-xs px-2 py-1 border border-[#1e3a8a] rounded-lg focus:outline-none text-[#1b4356]"
                           autoFocus
                           onKeyDown={e => {
                             if (e.key === 'Enter') handleSaveRename(conv, e as any);

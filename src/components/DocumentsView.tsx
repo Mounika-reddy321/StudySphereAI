@@ -223,9 +223,7 @@ export const DocumentsView: React.FC<DocumentsViewProps> = ({
 
                       <button
                         onClick={() => {
-                          if (confirm(`Remove "${doc.title}" from your study materials?`)) {
-                            onDeleteDocument(doc.id);
-                          }
+                          onDeleteDocument(doc.id);
                         }}
                         className="text-[#517c8d] hover:text-rose-600 p-1 rounded transition"
                         title="Delete document"

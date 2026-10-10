@@ -163,6 +163,86 @@ export interface AnalyticsData {
   recentQuizScores: { title: string; percentage: number; date: string }[];
 }
 
+export interface ResumeExperience {
+  role: string;
+  organization: string;
+  location?: string;
+  period: string;
+  bullets: string[];
+}
+
+export interface ResumeProject {
+  title: string;
+  technologies: string[];
+  link?: string;
+  bullets: string[];
+}
+
+export interface ResumeEducation {
+  institution: string;
+  degree: string;
+  field: string;
+  year: string;
+  gpa?: string;
+  highlights?: string[];
+}
+
+export interface ResumeData {
+  id: string;
+  userId: string;
+  title: string;
+  targetRole: string;
+  style: 'modern-tech' | 'academic-cv' | 'minimalist' | 'executive';
+  personalInfo: {
+    fullName: string;
+    email: string;
+    phone?: string;
+    location?: string;
+    linkedin?: string;
+    github?: string;
+    portfolio?: string;
+  };
+  summary: string;
+  skills: {
+    category: string;
+    items: string[];
+  }[];
+  education: ResumeEducation[];
+  experience: ResumeExperience[];
+  projects: ResumeProject[];
+  certifications?: string[];
+  markdownContent?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SlideItem {
+  slideNumber: number;
+  title: string;
+  subtitle?: string;
+  layout: 'title-slide' | 'bullet-list' | 'two-column' | 'quote-stat' | 'conclusion-qa' | 'process-steps';
+  bulletPoints: string[];
+  speakerNotes: string;
+  keyTakeaway?: string;
+  columnLeft?: { heading: string; points: string[] };
+  columnRight?: { heading: string; points: string[] };
+  statNumber?: string;
+  statLabel?: string;
+}
+
+export interface PresentationDeck {
+  id: string;
+  userId: string;
+  topic: string;
+  title: string;
+  subtitle?: string;
+  presenter: string;
+  themeStyle: 'navy-academic' | 'modern-dark' | 'minimal-light' | 'tech-gradient';
+  slides: SlideItem[];
+  createdAt: string;
+  updatedAt: string;
+}
+
 export type ActiveTab =
   | 'chat'
   | 'learning-mode'
@@ -171,4 +251,6 @@ export type ActiveTab =
   | 'quizzes'
   | 'planner'
   | 'analytics'
-  | 'settings';
+  | 'settings'
+  | 'resume'
+  | 'ppt';

@@ -10,7 +10,7 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 36, showText 
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
       <div
-        className="relative flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff765e] via-[#f87158] to-[#f4624b] shadow-md shadow-[#ff765e]/25 text-white shrink-0"
+        className="relative flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#0f2b48] via-[#1e3a8a] to-[#1e40af] shadow-md shadow-blue-950/30 text-white shrink-0"
         style={{ width: size, height: size }}
       >
         <svg
@@ -55,17 +55,17 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 36, showText 
           />
 
           {/* Neural AI Nodes */}
-          <circle cx="24" cy="11" r="2.5" fill="#fef08a" />
-          <circle cx="12" cy="20" r="2" fill="#fed7aa" />
-          <circle cx="36" cy="20" r="2" fill="#fed7aa" />
+          <circle cx="24" cy="11" r="2.5" fill="#93c5fd" />
+          <circle cx="12" cy="20" r="2" fill="#60a5fa" />
+          <circle cx="36" cy="20" r="2" fill="#60a5fa" />
           <circle cx="17" cy="34" r="2" fill="#ffffff" />
           <circle cx="31" cy="34" r="2" fill="#ffffff" />
 
           {/* Connecting Synaptic Fibers */}
-          <line x1="24" y1="11" x2="12" y2="20" stroke="#fed7aa" strokeWidth="1" strokeOpacity="0.7" />
-          <line x1="24" y1="11" x2="36" y2="20" stroke="#fed7aa" strokeWidth="1" strokeOpacity="0.7" />
-          <line x1="12" y1="20" x2="17" y2="34" stroke="#fed7aa" strokeWidth="1" strokeOpacity="0.5" />
-          <line x1="36" y1="20" x2="31" y2="34" stroke="#fed7aa" strokeWidth="1" strokeOpacity="0.5" />
+          <line x1="24" y1="11" x2="12" y2="20" stroke="#93c5fd" strokeWidth="1" strokeOpacity="0.7" />
+          <line x1="24" y1="11" x2="36" y2="20" stroke="#93c5fd" strokeWidth="1" strokeOpacity="0.7" />
+          <line x1="12" y1="20" x2="17" y2="34" stroke="#93c5fd" strokeWidth="1" strokeOpacity="0.5" />
+          <line x1="36" y1="20" x2="31" y2="34" stroke="#93c5fd" strokeWidth="1" strokeOpacity="0.5" />
         </svg>
       </div>
 
@@ -73,7 +73,7 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 36, showText 
         <div className="flex flex-col select-none">
           <div className="flex items-center gap-1.5">
             <span className="font-extrabold tracking-tight text-lg text-[#1b4356] dark:text-white leading-none">
-              Study<span className="text-[#ff765e]">Sphere</span>
+              Study<span className="text-[#1e3a8a] dark:text-[#38bdf8]">Sphere</span>
             </span>
             <span className="px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-white/80 dark:bg-sky-950/70 text-[#1b4356] dark:text-sky-300 rounded-full border border-[#b2e8e4]">
               AI Tutor

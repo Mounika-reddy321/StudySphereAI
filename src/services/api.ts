@@ -8,6 +8,8 @@ import {
   QuizAttempt,
   StudyPlan,
   AnalyticsData,
+  ResumeData,
+  PresentationDeck,
 } from '../types/index.js';
 
 const TOKEN_KEY = 'studysphere_auth_token';
@@ -43,6 +45,9 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   });
 
   if (!response.ok) {
+    if (response.status === 401) {
+      setStoredToken(null);
+    }
     let errorMsg = `Request failed (${response.status})`;
     try {
       const errJson = await response.json();
@@ -400,5 +405,78 @@ export const api = {
   // Analytics
   async getAnalytics(): Promise<AnalyticsData> {
     return request<AnalyticsData>('/api/analytics');
+  },
+
+  // Resume Builder
+  async getResumes(): Promise<ResumeData[]> {
+    return request<ResumeData[]>('/api/resumes');
+  },
+
+  async getResume(id: string): Promise<ResumeData> {
+    return request<ResumeData>(`/api/resumes/${id}`);
+  },
+
+  async generateResume(payload: {
+    targetRole?: string;
+    style?: 'modern-tech' | 'academic-cv' | 'minimalist' | 'executive';
+    fullName?: string;
+    email?: string;
+    phone?: string;
+    location?: string;
+    linkedin?: string;
+    github?: string;
+    portfolio?: string;
+    customSkills?: string;
+    customExperience?: string;
+    customEducation?: string;
+    customProjects?: string;
+    includeAchievements?: boolean;
+  }): Promise<ResumeData> {
+    return request<ResumeData>('/api/resumes/generate', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  async updateResume(id: string, updates: Partial<ResumeData>): Promise<ResumeData> {
+    return request<ResumeData>(`/api/resumes/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(updates),
+    });
+  },
+
+  async deleteResume(id: string): Promise<{ success: boolean }> {
+    return request<{ success: boolean }>(`/api/resumes/${id}`, {
+      method: 'DELETE',
+    });
+  },
+
+  // Presentation Deck Studio
+  async getPresentations(): Promise<PresentationDeck[]> {
+    return request<PresentationDeck[]>('/api/presentations');
+  },
+
+  async getPresentation(id: string): Promise<PresentationDeck> {
+    return request<PresentationDeck>(`/api/presentations/${id}`);
+  },
+
+  async generatePresentation(payload: {
+    topic: string;
+    targetAudience?: string;
+    slideCount?: number;
+    themeStyle?: 'navy-academic' | 'modern-dark' | 'minimal-light' | 'tech-gradient';
+    presenterName?: string;
+    documentId?: string;
+  }): Promise<PresentationDeck> {
+    return request<PresentationDeck>('/api/presentations/generate', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  async deletePresentation(id: string): Promise<{ success: boolean }> {
+    return request<{ success: boolean }>(`/api/presentations/${id}`, {
+      method: 'DELETE',
+    });
   },
 };

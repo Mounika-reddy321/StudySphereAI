@@ -13,6 +13,8 @@ import {
   BarChart3,
   Settings,
   MessageSquare,
+  Briefcase,
+  Presentation,
 } from 'lucide-react';
 import { ActiveTab, User } from '../types/index.js';
 
@@ -38,6 +40,21 @@ const TAB_METADATA: Record<ActiveTab, { title: string; subtitle: string; icon: a
     subtitle: 'Step-by-step guidance, simplification, practice & revision',
     icon: BookOpen,
   },
+  quizzes: {
+    title: 'AI Quiz Generator',
+    subtitle: 'Automated practice tests, grading & constructive evaluations',
+    icon: HelpCircle,
+  },
+  resume: {
+    title: 'Resume & CV Builder',
+    subtitle: 'ATS-optimized professional resumes tailored to technical & academic roles',
+    icon: Briefcase,
+  },
+  ppt: {
+    title: 'PPT & Slides Generator',
+    subtitle: 'Interactive seminar decks, lecture slides & spoken keynote presenter notes',
+    icon: Presentation,
+  },
   documents: {
     title: 'Study Materials & RAG',
     subtitle: 'Document-grounded question answering and chapter revision',
@@ -47,11 +64,6 @@ const TAB_METADATA: Record<ActiveTab, { title: string; subtitle: string; icon: a
     title: 'StudySphere Memory',
     subtitle: 'User-controlled facts, preferences & long-term knowledge',
     icon: Brain,
-  },
-  quizzes: {
-    title: 'AI Quiz Generator',
-    subtitle: 'Automated practice tests, grading & constructive evaluations',
-    icon: HelpCircle,
   },
   planner: {
     title: 'Personalized Study Roadmap',
@@ -102,11 +114,11 @@ export const Header: React.FC<HeaderProps> = ({
         </button>
 
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-xl bg-white/90 dark:bg-slate-800 text-[#1b4356] dark:text-sky-400 border border-[#aee3df] dark:border-slate-700 shadow-2xs hidden sm:flex">
-            <Icon className="w-4 h-4 text-[#ff765e]" />
+          <div className="p-2 rounded-xl bg-white/90 dark:bg-slate-800 text-[#0f2b48] dark:text-sky-400 border border-[#aee3df] dark:border-slate-700 shadow-2xs hidden sm:flex">
+            <Icon className="w-4 h-4 text-[#1e3a8a] dark:text-sky-400" />
           </div>
           <div>
-            <h1 className="text-sm sm:text-base font-extrabold text-[#1b4356] dark:text-white leading-tight">
+            <h1 className="text-sm sm:text-base font-extrabold text-[#0f2b48] dark:text-white leading-tight">
               {currentTabInfo.title}
             </h1>
             <p className="hidden sm:block text-[11px] text-[#517c8d] dark:text-slate-400 font-medium">
@@ -119,7 +131,7 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Multilingual Selector */}
         <div className="relative flex items-center bg-white/90 dark:bg-slate-800 rounded-xl px-2.5 py-1.5 border border-[#b2e8e4] dark:border-slate-700 shadow-2xs">
-          <Globe className="w-3.5 h-3.5 text-[#308197] dark:text-sky-400 mr-1.5" />
+          <Globe className="w-3.5 h-3.5 text-[#1e3a8a] dark:text-sky-400 mr-1.5" />
           <select
             value={selectedLanguage}
             onChange={e => onSelectLanguage(e.target.value)}
@@ -139,7 +151,7 @@ export const Header: React.FC<HeaderProps> = ({
           className="p-2 text-[#517c8d] hover:text-[#1b4356] dark:text-slate-400 dark:hover:text-slate-100 rounded-xl bg-white/80 hover:bg-white dark:bg-slate-800 transition border border-[#b2e8e4] dark:border-slate-700 shadow-2xs"
           title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
         >
-          {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
+          {darkMode ? <Sun className="w-4 h-4 text-sky-400" /> : <Moon className="w-4 h-4" />}
         </button>
 
         {/* User Account Button */}
@@ -149,14 +161,14 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex items-center gap-2 pl-1 cursor-pointer group"
             title="Account profile"
           >
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#ff765e] to-[#f4624b] flex items-center justify-center text-white text-xs font-bold shadow-sm group-hover:scale-105 transition">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0f2b48] to-[#1e3a8a] flex items-center justify-center text-white text-xs font-bold shadow-sm group-hover:scale-105 transition">
               {currentUser.name.charAt(0).toUpperCase()}
             </div>
           </div>
         ) : (
           <button
             onClick={onOpenAuth}
-            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-[#ff765e] to-[#f4624b] hover:from-[#f8674f] hover:to-[#e65239] text-white shadow-sm shadow-[#f4624b]/20 transition"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-[#0f2b48] to-[#1e3a8a] hover:from-[#163b63] hover:to-[#1e40af] text-white shadow-sm shadow-blue-950/20 transition"
           >
             Sign In
           </button>

@@ -38,8 +38,14 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editFact, setEditFact] = useState('');
   const [editCategory, setEditCategory] = useState<Memory['category']>('preference');
+  const [statusMsg, setStatusMsg] = useState<string | null>(null);
 
   const memoryEnabled = currentUser?.enableMemory ?? true;
+
+  const showStatus = (msg: string) => {
+    setStatusMsg(msg);
+    setTimeout(() => setStatusMsg(null), 3000);
+  };
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,9 +55,10 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
       await api.addMemory(newFact.trim(), newCategory);
       setNewFact('');
       setIsAdding(false);
+      showStatus('Memory added to StudySphere knowledge base.');
       onRefreshMemories();
     } catch (err: any) {
-      alert(`Failed to save memory: ${err.message}`);
+      showStatus(`Failed to save memory: ${err.message}`);
     }
   };
 
@@ -66,31 +73,30 @@ export const MemoryView: React.FC<MemoryViewProps> = ({
     try {
       await api.updateMemory(id, { fact: editFact.trim(), category: editCategory });
       setEditingId(null);
+      showStatus('Memory updated.');
       onRefreshMemories();
     } catch (err: any) {
-      alert(`Failed to update memory: ${err.message}`);
+      showStatus(`Failed to update memory: ${err.message}`);
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm('Permanently delete this stored memory?')) {
-      try {
-        await api.deleteMemory(id);
-        onRefreshMemories();
-      } catch (err: any) {
-        alert(`Failed to delete memory: ${err.message}`);
-      }
+    try {
+      await api.deleteMemory(id);
+      showStatus('Memory removed.');
+      onRefreshMemories();
+    } catch (err: any) {
+      showStatus(`Failed to delete memory: ${err.message}`);
     }
   };
 
   const handleClearAll = async () => {
-    if (confirm('Are you sure you want to delete ALL stored memories? This cannot be undone.')) {
-      try {
-        await api.clearMemories();
-        onRefreshMemories();
-      } catch (err: any) {
-        alert(`Failed to clear memories: ${err.message}`);
-      }
+    try {
+      await api.clearMemories();
+      showStatus('All memories cleared.');
+      onRefreshMemories();
+    } catch (err: any) {
+      showStatus(`Failed to clear memories: ${err.message}`);
     }
   };
 

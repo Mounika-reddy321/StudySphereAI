@@ -7,8 +7,9 @@
     --border-skyhop: #b2e8e4;
     --navy-skyhop: #1b4356;
     --muted-skyhop: #517c8d;
-    --coral-skyhop: #f87158;
-    --coral-hover: #ef6147;
+    --navy-primary: #1b365d;
+    --navy-dark: #0f2942;
+    --navy-hover: #0b2238;
   }
 
   body {
@@ -55,19 +56,19 @@
   border: 1px solid rgba(178, 232, 228, 0.85);
 }
 
-.skyhop-btn-coral {
-  background: linear-gradient(135deg, #ff765e 0%, #f4624b 100%);
+.skyhop-btn-navy {
+  background: linear-gradient(135deg, #0f2d4a 0%, #1b365d 100%);
   color: #ffffff;
-  box-shadow: 0 4px 14px 0 rgba(244, 98, 75, 0.35);
+  box-shadow: 0 4px 14px 0 rgba(15, 45, 74, 0.35);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.skyhop-btn-coral:hover {
-  background: linear-gradient(135deg, #f8674f 0%, #e65239 100%);
-  box-shadow: 0 6px 18px 0 rgba(244, 98, 75, 0.45);
+.skyhop-btn-navy:hover {
+  background: linear-gradient(135deg, #0a1f33 0%, #152c4a 100%);
+  box-shadow: 0 6px 18px 0 rgba(15, 45, 74, 0.45);
   transform: translateY(-1px);
 }
 
-.skyhop-btn-coral:active {
+.skyhop-btn-navy:active {
   transform: translateY(0);
 }

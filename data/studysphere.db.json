@@ -149,6 +149,24 @@
       "language": "English",
       "createdAt": "2026-10-09T19:04:45.348Z",
       "updatedAt": "2026-10-09T19:04:48.388Z"
+    },
+    {
+      "id": "conv-1791598030407-e8mz",
+      "userId": "usr-student-01",
+      "title": "You are StudySphere Personal Learning Coach.\n...",
+      "learningMode": "step-by-step",
+      "language": "English",
+      "createdAt": "2026-10-10T02:07:10.407Z",
+      "updatedAt": "2026-10-10T02:07:15.988Z"
+    },
+    {
+      "id": "conv-1791598758338-x6es",
+      "userId": "usr-student-01",
+      "title": "You are StudySphere Personal Learning Coach.\n...",
+      "learningMode": "step-by-step",
+      "language": "English",
+      "createdAt": "2026-10-10T02:19:18.338Z",
+      "updatedAt": "2026-10-10T02:19:33.775Z"
     }
   ],
   "messages": [
@@ -384,6 +402,40 @@
       "timestamp": "2026-10-09T19:04:48.388Z",
       "memorySuggestion": "The student is studying physics as part of their preparation for May exams and appreciates connecting physical laws to computational concepts like distributed systems and optimization.",
       "learningMode": "general"
+    },
+    {
+      "id": "msg-1791598030407-u",
+      "conversationId": "conv-1791598030407-e8mz",
+      "role": "user",
+      "content": "You are StudySphere Personal Learning Coach.\nCreate an exhaustive, structured learning guide on the topic: Convolutional Neural Networks\nCurrent Student Level: Intermediate\nLearning Goal: Deep understanding & problem solving\nAvailable Study Time: 30 minutes\nExplanation Language: English\nLearning Mode: Step-by-Step Lesson\n\nRequirements:\n- Begin with an intuitive 2-sentence executive summary.\n- Provide step-by-step progressive sections with clean Markdown headings and lists.\n- Include real-world analogies, formal definitions, and LaTeX mathematical formulas or code snippets if applicable.\n- Conclude with 2 Practice Questions or Knowledge-Check prompts.\n- Recommend 3 Suggested Next Topics for continuous mastery.",
+      "timestamp": "2026-10-10T02:07:10.407Z",
+      "learningMode": "step-by-step"
+    },
+    {
+      "id": "msg-1791598035988-a",
+      "conversationId": "conv-1791598030407-e8mz",
+      "role": "assistant",
+      "content": "Hello! I am **StudySphere**, your dedicated academic coach. It is a pleasure to assist you in your preparation for your upcoming Machine Learning exams. Let’s master **Convolutional Neural Networks (CNNs)** in the next 30 minutes.\n\n### Executive Summary\nConvolutional Neural Networks are specialized deep learning architectures designed to process grid-like data, such as images, by automatically learning spatial hierarchies of features through sliding filters. By leveraging weight sharing and local connectivity, they drastically reduce parameter complexity compared to standard dense networks, making them the gold standard for computer vision.\n\n---\n\n### 1. Core Intuition: The \"Flashlight\" Analogy\nImagine you are in a pitch-black room trying to identify a painting on the wall. Instead of looking at the whole room at once, you use a small **flashlight** to scan the wall section by section. As you move the light, your brain identifies patterns: a curve here, a straight line there, and eventually, a face. \n*   **The Flashlight** is the **Filter (Kernel)**.\n*   **The Scanning Process** is the **Convolution**.\n*   **The Pattern Recognition** is the **Feature Map**.\n\n---\n\n### 2. Foundational Definitions\n*   **Convolution Layer:** The core building block; it applies a set of learnable filters to the input to extract features.\n*   **Kernel/Filter:** A small matrix of weights used to compute dot products across the input.\n*   **Stride:** The number of pixels the filter shifts at each step.\n*   **Padding:** Adding zeros around the input border to maintain spatial dimensions.\n*   **Pooling Layer (Downsampling):** Reduces the spatial dimensions (width/height) to lower computational load and prevent overfitting (e.g., Max Pooling).\n\n---\n\n### 3. Detailed Mechanism: The Mathematical View\nThe convolution operation at a specific position $(i, j)$ for an input $I$ and kernel $K$ is defined as:\n\n$$(I * K)_{i,j} = \\sum_{m} \\sum_{n} I_{i+m, j+n} \\cdot K_{m,n}$$\n\n**Why this works for Distributed Systems/ML:**\nIn a standard Fully Connected (FC) layer, every input pixel connects to every neuron. If you have a $1000 \\times 1000$ image, that is $10^6$ connections per neuron! CNNs use **Weight Sharing**, where the same filter is applied across the whole image, drastically reducing the memory footprint—a critical consideration for your Distributed Systems studies.\n\n---\n\n### 4. Practical Walkthrough (Python/PyTorch)\nHere is how we define a simple convolutional layer in PyTorch:\n\n```python\nimport torch.nn as nn\n\n# Define a single convolution layer\n# in_channels=3 (RGB), out_channels=16 (filters), kernel_size=3\nconv_layer = nn.Conv2d(in_channels=3, out_channels=16, kernel_size=3, stride=1, padding=1)\n\n# Example tensor (Batch size 1, 3 channels, 64x64 image)\ninput_tensor = torch.randn(1, 3, 64, 64)\noutput = conv_layer(input_tensor)\n\nprint(f\"Output shape: {output.shape}\") \n# Output: torch.Size([1, 16, 64, 64])\n```\n\n---\n\n### 5. Check-for-Understanding\n1.  **Conceptual:** If you have an input of size $32 \\times 32$ and apply a $3 \\times 3$ filter with **no padding** and a **stride of 1**, what will be the output dimension? \n2.  **Architectural:** Why might we prefer a Max Pooling layer over a simple stride-based downsampling in a deep network?\n\n---\n\n### Suggested Next Topics for Mastery\n1.  **Backpropagation in CNNs:** Understanding how gradients flow through the convolution operation.\n2.  **Advanced Architectures:** Study ResNet (Residual Connections) to solve the vanishing gradient problem.\n3.  **Transfer Learning:** Leveraging pre-trained models (like VGG or EfficientNet) for specialized tasks.\n\n***",
+      "timestamp": "2026-10-10T02:07:15.988Z",
+      "memorySuggestion": "The student is preparing for Machine Learning exams and prefers learning through Python code examples and intuitive analogies.",
+      "learningMode": "step-by-step"
+    },
+    {
+      "id": "msg-1791598758339-u",
+      "conversationId": "conv-1791598758338-x6es",
+      "role": "user",
+      "content": "You are StudySphere Personal Learning Coach.\nCreate an exhaustive, structured learning guide on the topic: Bayesian Statistics\nCurrent Student Level: Beginner\nLearning Goal: Foundational understanding\nAvailable Study Time: 15 minutes\nExplanation Language: English\nLearning Mode: Step-by-Step Lesson",
+      "timestamp": "2026-10-10T02:19:18.339Z",
+      "learningMode": "step-by-step"
+    },
+    {
+      "id": "msg-1791598773775-a",
+      "conversationId": "conv-1791598758338-x6es",
+      "role": "assistant",
+      "content": "Hello! I am **StudySphere**, your personal learning coach. It is a pleasure to help you prepare for your upcoming Machine Learning and Distributed Systems exams. \n\nBayesian Statistics is a fundamental pillar of modern Machine Learning. Let’s break it down into a 15-minute \"Step-by-Step\" lesson.\n\n---\n\n### 1. Core Intuition: The \"Updating\" Mindset\nImagine you are trying to guess if it will rain today. \n*   **Frequentist approach:** You look at historical weather data for this date over the last 50 years and calculate the percentage of rainy days.\n*   **Bayesian approach:** You start with a belief (e.g., \"It’s usually sunny in May\"), but as you see dark clouds gathering or hear thunder, you **update** your belief. Bayesian statistics is essentially the math of **learning from evidence.**\n\n---\n\n### 2. Foundational Definitions\nIn Bayesian statistics, we treat parameters as random variables rather than fixed numbers. The heart of the theory is **Bayes' Theorem**:\n\n$$P(H|E) = \\frac{P(E|H) \\cdot P(H)}{P(E)}$$\n\n*   **$P(H|E)$ (Posterior):** The probability of our hypothesis ($H$) after seeing the evidence ($E$).\n*   **$P(E|H)$ (Likelihood):** How likely the evidence is, assuming our hypothesis is true.\n*   **$P(H)$ (Prior):** Our initial belief before seeing the evidence.\n*   **$P(E)$ (Marginal Likelihood):** The total probability of the evidence across all possible hypotheses.\n\n---\n\n### 3. Detailed Mechanism\nThe process follows a loop:\n1.  **Start with a Prior:** Define your initial guess.\n2.  **Observe Evidence:** Collect new data.\n3.  **Calculate Likelihood:** Determine how well the data fits your hypothesis.\n4.  **Update to Posterior:** Combine the prior and likelihood to form a new, better-informed belief.\n\n---\n\n### 4. Practical Walkthrough (Python)\nLet’s say we want to estimate the probability of a biased coin landing on heads. We use a **Beta distribution**, which is the \"conjugate prior\" for coin flips.\n\n```python\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import beta\n\n# Prior: We think the coin is fair (Beta distribution centered at 0.5)\nalpha_prior, beta_prior = 2, 2 \n\n# Evidence: We flip the coin 10 times and get 8 heads (successes)\nheads = 8\ntails = 2\n\n# Posterior: Update the parameters by adding evidence\nalpha_post = alpha_prior + heads\nbeta_post = beta_prior + tails\n\nprint(f\"Updated belief: Beta({alpha_post}, {beta_post})\")\n```\n*In Machine Learning, this \"updating\" logic is how algorithms like Naive Bayes classifiers work!*\n\n---\n\n### 5. Check-for-Understanding\nTo test your intuition: \n**If you are 90% sure a machine is working correctly (Prior), but then you receive an error log (Evidence), does the \"Posterior\" probability of the machine working correctly increase or decrease?**\n\n*(Think about how the evidence of an error clashes with your high-confidence prior!)*\n\n---\n\nI hope this guide helps you feel more confident for your exams. Do you have any questions about these steps, or would you like to dive deeper into how this applies to Machine Learning models?",
+      "timestamp": "2026-10-10T02:19:33.775Z",
+      "memorySuggestion": "The student is learning Bayesian Statistics to support their upcoming Machine Learning and Distributed Systems exam preparation.",
+      "learningMode": "step-by-step"
     }
   ],
   "quizzes": [
@@ -428,6 +480,135 @@
           "explanation": "Without positional encodings, the attention mechanism is permutation invariant."
         }
       ]
+    },
+    {
+      "id": "quiz-1791598001383-edrp",
+      "userId": "usr-student-01",
+      "title": "Introduction to Photosynthesis",
+      "topic": "Photosynthesis",
+      "difficulty": "easy",
+      "questions": [
+        {
+          "id": "q-1-1791598001383",
+          "type": "mcq",
+          "question": "Which gas do plants primarily absorb from the atmosphere to perform photosynthesis?",
+          "options": [
+            "Oxygen",
+            "Carbon dioxide",
+            "Nitrogen",
+            "Hydrogen"
+          ],
+          "correctAnswer": "Carbon dioxide",
+          "explanation": "Plants take in carbon dioxide from the air through their leaves, which is then used alongside water and sunlight to produce glucose."
+        },
+        {
+          "id": "q-2-1791598001383",
+          "type": "mcq",
+          "question": "What is the primary source of energy that powers the process of photosynthesis?",
+          "options": [
+            "Soil nutrients",
+            "Water",
+            "Sunlight",
+            "Oxygen"
+          ],
+          "correctAnswer": "Sunlight",
+          "explanation": "Photosynthesis is a process that converts light energy, typically from the sun, into chemical energy stored in glucose molecules."
+        }
+      ],
+      "timeLimitMinutes": 10,
+      "createdAt": "2026-10-10T02:06:41.383Z"
+    },
+    {
+      "id": "quiz-1791598257581-em0l",
+      "userId": "usr-student-01",
+      "title": "Understanding Convolutional Neural Networks (CNNs)",
+      "topic": "Convolutional Neural Networks",
+      "difficulty": "medium",
+      "questions": [
+        {
+          "id": "q-1-1791598257581",
+          "type": "mcq",
+          "question": "Which layer in a CNN is primarily responsible for reducing the spatial dimensions of the input volume to decrease computational load and prevent overfitting?",
+          "options": [
+            "Convolutional Layer",
+            "Pooling Layer",
+            "Fully Connected Layer",
+            "Softmax Layer"
+          ],
+          "correctAnswer": "Pooling Layer",
+          "explanation": "Pooling layers, such as Max Pooling, downsample the input by taking the maximum or average value in a window, which reduces the number of parameters and controls overfitting."
+        },
+        {
+          "id": "q-2-1791598257581",
+          "type": "true-false",
+          "question": "In a Convolutional Neural Network, the weight-sharing property allows the model to learn features regardless of their spatial location in the image.",
+          "options": [
+            "True",
+            "False"
+          ],
+          "correctAnswer": "True",
+          "explanation": "Because the same filter (weights) is applied across the entire input image, the network learns to detect specific features like edges or textures anywhere in the frame."
+        },
+        {
+          "id": "q-3-1791598257581",
+          "type": "short-answer",
+          "question": "What is the term for the process of multiplying the input pixel values by the filter values and summing them up to produce a single value in the output feature map?",
+          "correctAnswer": "Convolution",
+          "explanation": "Convolution is the mathematical operation (dot product) performed when the filter slides over the input image to extract feature maps."
+        },
+        {
+          "id": "q-4-1791598257581",
+          "type": "mcq",
+          "question": "What happens to the output size of a feature map if you increase the stride length of a convolutional filter?",
+          "options": [
+            "The output size increases.",
+            "The output size decreases.",
+            "The output size stays the same.",
+            "The output size becomes zero."
+          ],
+          "correctAnswer": "The output size decreases.",
+          "explanation": "Increasing the stride length means the filter skips more pixels while sliding, which results in a smaller output feature map compared to a smaller stride."
+        }
+      ],
+      "timeLimitMinutes": 8,
+      "createdAt": "2026-10-10T02:10:57.581Z"
+    },
+    {
+      "id": "quiz-1791598749227-gt9w",
+      "userId": "usr-student-01",
+      "title": "Introduction to Dynamic Programming",
+      "topic": "Dynamic Programming",
+      "difficulty": "easy",
+      "questions": [
+        {
+          "id": "q-1-1791598749227",
+          "type": "mcq",
+          "question": "What is the primary purpose of using Dynamic Programming in algorithm design?",
+          "options": [
+            "To increase the memory usage of an algorithm",
+            "To solve problems by breaking them into overlapping subproblems and storing their results",
+            "To ensure an algorithm always runs in constant time",
+            "To avoid using recursion entirely"
+          ],
+          "correctAnswer": "To solve problems by breaking them into overlapping subproblems and storing their results",
+          "explanation": "Dynamic Programming works by solving smaller subproblems once and storing their solutions (memoization or tabulation), which prevents redundant computations and significantly improves efficiency."
+        },
+        {
+          "id": "q-2-1791598749227",
+          "type": "mcq",
+          "question": "Which of the following is a key technique used in Dynamic Programming to store the results of subproblems?",
+          "options": [
+            "Greedy Choice Property",
+            "Memoization",
+            "Backtracking",
+            "Linear Search"
+          ],
+          "correctAnswer": "Memoization",
+          "explanation": "Memoization is a common DP technique where the results of expensive function calls are cached so that when the same inputs occur again, the algorithm can return the cached result instead of re-computing it."
+        }
+      ],
+      "timeLimitMinutes": 10,
+      "createdAt": "2026-10-10T02:19:09.227Z"
     }
   ],
   "quizAttempts": [],
@@ -499,6 +680,176 @@
           ]
         }
       ]
+    },
+    {
+      "id": "plan-1791598104801-9tje",
+      "userId": "usr-student-01",
+      "title": "4-Week Python for Data Science Mastery Roadmap",
+      "goal": "Master Python for Data Science",
+      "targetLevel": "intermediate",
+      "timeframeWeeks": 4,
+      "availableHoursPerWeek": 10,
+      "status": "active",
+      "stages": [
+        {
+          "id": "stg-1791598104801-1",
+          "title": "Week 1: Advanced Data Manipulation with Pandas & NumPy",
+          "order": 1,
+          "tasks": [
+            {
+              "id": "tsk-1791598104801-1-1",
+              "title": "Vectorized Operations Deep Dive",
+              "description": "Review NumPy broadcasting and universal functions for efficient numerical computation.",
+              "durationMinutes": 90,
+              "completed": false,
+              "type": "concept"
+            },
+            {
+              "id": "tsk-1791598104801-1-2",
+              "title": "Pandas Data Wrangling Workshop",
+              "description": "Practice reshaping, pivoting, and multi-level indexing on a complex financial dataset.",
+              "durationMinutes": 120,
+              "completed": false,
+              "type": "practice"
+            },
+            {
+              "id": "tsk-1791598104801-1-3",
+              "title": "Efficient Data Merging",
+              "description": "Read documentation and implement joins (inner, outer, cross) between disparate SQL-style dataframes.",
+              "durationMinutes": 90,
+              "completed": false,
+              "type": "reading"
+            },
+            {
+              "id": "tsk-1791598104801-1-4",
+              "title": "Weekly Assessment",
+              "description": "Complete a quiz on time-series slicing and groupby aggregations.",
+              "durationMinutes": 60,
+              "completed": false,
+              "type": "quiz"
+            }
+          ]
+        },
+        {
+          "id": "stg-1791598104801-2",
+          "title": "Week 2: Statistical Analysis & Visualization",
+          "order": 2,
+          "tasks": [
+            {
+              "id": "tsk-1791598104801-2-1",
+              "title": "Statistical Distribution Modeling",
+              "description": "Use SciPy and Statsmodels to perform hypothesis testing and calculate confidence intervals.",
+              "durationMinutes": 120,
+              "completed": false,
+              "type": "concept"
+            },
+            {
+              "id": "tsk-1791598104801-2-2",
+              "title": "Advanced Visualization Library Mastery",
+              "description": "Build layered plots using Seaborn and Plotly to express multi-dimensional relationships.",
+              "durationMinutes": 120,
+              "completed": false,
+              "type": "practice"
+            },
+            {
+              "id": "tsk-1791598104801-2-3",
+              "title": "Visualization Best Practices",
+              "description": "Read articles on data storytelling and color theory for scientific communication.",
+              "durationMinutes": 60,
+              "completed": false,
+              "type": "reading"
+            },
+            {
+              "id": "tsk-1791598104801-2-4",
+              "title": "Mid-Roadmap Review",
+              "description": "Review previous code snippets and refactor inefficient looping functions into vectorized operations.",
+              "durationMinutes": 60,
+              "completed": false,
+              "type": "revision"
+            }
+          ]
+        },
+        {
+          "id": "stg-1791598104801-3",
+          "title": "Week 3: Machine Learning Fundamentals",
+          "order": 3,
+          "tasks": [
+            {
+              "id": "tsk-1791598104801-3-1",
+              "title": "Scikit-Learn Pipeline Architecture",
+              "description": "Study the creation of custom transformers and ML pipelines to prevent data leakage.",
+              "durationMinutes": 120,
+              "completed": false,
+              "type": "concept"
+            },
+            {
+              "id": "tsk-1791598104801-3-2",
+              "title": "End-to-End Model Implementation",
+              "description": "Build, tune, and evaluate a random forest regressor on a real-world Kaggle dataset.",
+              "durationMinutes": 180,
+              "completed": false,
+              "type": "practice"
+            },
+            {
+              "id": "tsk-1791598104801-3-3",
+              "title": "Feature Engineering Deep Dive",
+              "description": "Read documentation on encoding categorical variables and scaling numerical inputs.",
+              "durationMinutes": 60,
+              "completed": false,
+              "type": "reading"
+            },
+            {
+              "id": "tsk-1791598104801-3-4",
+              "title": "Model Evaluation Quiz",
+              "description": "Quiz on metrics like precision-recall curves, F1 score, and ROC-AUC.",
+              "durationMinutes": 40,
+              "completed": false,
+              "type": "quiz"
+            }
+          ]
+        },
+        {
+          "id": "stg-1791598104801-4",
+          "title": "Week 4: Project Integration & Optimization",
+          "order": 4,
+          "tasks": [
+            {
+              "id": "tsk-1791598104801-4-1",
+              "title": "Algorithm Optimization",
+              "description": "Profile your code using line_profiler and optimize bottleneck functions for speed.",
+              "durationMinutes": 90,
+              "completed": false,
+              "type": "practice"
+            },
+            {
+              "id": "tsk-1791598104801-4-2",
+              "title": "Portfolio Project Finalization",
+              "description": "Clean up your best code, write a README, and document assumptions for your final project.",
+              "durationMinutes": 150,
+              "completed": false,
+              "type": "practice"
+            },
+            {
+              "id": "tsk-1791598104801-4-3",
+              "title": "Comprehensive Review",
+              "description": "Go through notes from all 4 weeks to consolidate knowledge on library-specific syntax.",
+              "durationMinutes": 90,
+              "completed": false,
+              "type": "revision"
+            },
+            {
+              "id": "tsk-1791598104801-4-4",
+              "title": "Final Synthesis Quiz",
+              "description": "A cumulative exam covering Python data science best practices and library selection.",
+              "durationMinutes": 70,
+              "completed": false,
+              "type": "quiz"
+            }
+          ]
+        }
+      ],
+      "createdAt": "2026-10-10T02:08:24.802Z",
+      "updatedAt": "2026-10-10T02:08:24.802Z"
     }
   ],
   "activities": [
@@ -606,6 +957,48 @@
       "action": "chat",
       "details": "Studied \"What is Newton third law of mo...\" in general mode",
       "timestamp": "2026-10-09T19:04:48.388Z"
+    },
+    {
+      "id": "act-1791598001384-5v0uy",
+      "userId": "usr-student-01",
+      "action": "lesson_learned",
+      "details": "Generated 2-question quiz on \"Introduction to Photosynthesis\"",
+      "timestamp": "2026-10-10T02:06:41.384Z"
+    },
+    {
+      "id": "act-1791598035989-bij1c",
+      "userId": "usr-student-01",
+      "action": "chat",
+      "details": "Studied \"You are StudySphere Personal L...\" in step-by-step mode",
+      "timestamp": "2026-10-10T02:07:15.989Z"
+    },
+    {
+      "id": "act-1791598104802-dlj08",
+      "userId": "usr-student-01",
+      "action": "lesson_learned",
+      "details": "Created personalized study roadmap for \"4-Week Python for Data Science Mastery Roadmap\"",
+      "timestamp": "2026-10-10T02:08:24.802Z"
+    },
+    {
+      "id": "act-1791598257581-xntnj",
+      "userId": "usr-student-01",
+      "action": "lesson_learned",
+      "details": "Generated 4-question quiz on \"Understanding Convolutional Neural Networks (CNNs)\"",
+      "timestamp": "2026-10-10T02:10:57.581Z"
+    },
+    {
+      "id": "act-1791598749228-5r9cm",
+      "userId": "usr-student-01",
+      "action": "lesson_learned",
+      "details": "Generated 2-question quiz on \"Introduction to Dynamic Programming\"",
+      "timestamp": "2026-10-10T02:19:09.228Z"
+    },
+    {
+      "id": "act-1791598773776-ynypt",
+      "userId": "usr-student-01",
+      "action": "chat",
+      "details": "Studied \"You are StudySphere Personal L...\" in step-by-step mode",
+      "timestamp": "2026-10-10T02:19:33.776Z"
     }
   ]
 }

@@ -149,6 +149,86 @@ export interface ActivityLog {
   timestamp: string;
 }
 
+export interface ResumeExperience {
+  role: string;
+  organization: string;
+  location?: string;
+  period: string;
+  bullets: string[];
+}
+
+export interface ResumeProject {
+  title: string;
+  technologies: string[];
+  link?: string;
+  bullets: string[];
+}
+
+export interface ResumeEducation {
+  institution: string;
+  degree: string;
+  field: string;
+  year: string;
+  gpa?: string;
+  highlights?: string[];
+}
+
+export interface ResumeData {
+  id: string;
+  userId: string;
+  title: string;
+  targetRole: string;
+  style: 'modern-tech' | 'academic-cv' | 'minimalist' | 'executive';
+  personalInfo: {
+    fullName: string;
+    email: string;
+    phone?: string;
+    location?: string;
+    linkedin?: string;
+    github?: string;
+    portfolio?: string;
+  };
+  summary: string;
+  skills: {
+    category: string;
+    items: string[];
+  }[];
+  education: ResumeEducation[];
+  experience: ResumeExperience[];
+  projects: ResumeProject[];
+  certifications?: string[];
+  markdownContent?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SlideItem {
+  slideNumber: number;
+  title: string;
+  subtitle?: string;
+  layout: 'title-slide' | 'bullet-list' | 'two-column' | 'quote-stat' | 'conclusion-qa' | 'process-steps';
+  bulletPoints: string[];
+  speakerNotes: string;
+  keyTakeaway?: string;
+  columnLeft?: { heading: string; points: string[] };
+  columnRight?: { heading: string; points: string[] };
+  statNumber?: string;
+  statLabel?: string;
+}
+
+export interface PresentationDeck {
+  id: string;
+  userId: string;
+  topic: string;
+  title: string;
+  subtitle?: string;
+  presenter: string;
+  themeStyle: 'navy-academic' | 'modern-dark' | 'minimal-light' | 'tech-gradient';
+  slides: SlideItem[];
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface DatabaseSchema {
   users: User[];
   memories: Memory[];
@@ -159,6 +239,8 @@ export interface DatabaseSchema {
   quizAttempts: QuizAttempt[];
   studyPlans: StudyPlan[];
   activities: ActivityLog[];
+  resumes: ResumeData[];
+  presentations: PresentationDeck[];
 }
 
 const DATA_DIR = path.resolve(process.cwd(), 'data');
@@ -174,6 +256,8 @@ const initialDatabase: DatabaseSchema = {
   quizAttempts: [],
   studyPlans: [],
   activities: [],
+  resumes: [],
+  presentations: [],
 };
 
 class Database {
@@ -686,6 +770,72 @@ Would you like to explore Multi-Head Attention next or test your understanding w
     return this.data.activities
       .filter(a => a.userId === userId)
       .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+  }
+
+  // Resume methods
+  getResumes(userId: string): ResumeData[] {
+    if (!this.data.resumes) this.data.resumes = [];
+    return this.data.resumes
+      .filter(r => r.userId === userId)
+      .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+  }
+
+  getResumeById(id: string, userId: string): ResumeData | undefined {
+    if (!this.data.resumes) this.data.resumes = [];
+    return this.data.resumes.find(r => r.id === id && r.userId === userId);
+  }
+
+  createResume(resume: ResumeData): ResumeData {
+    if (!this.data.resumes) this.data.resumes = [];
+    this.data.resumes.push(resume);
+    this.save();
+    return resume;
+  }
+
+  updateResume(id: string, userId: string, updates: Partial<ResumeData>): ResumeData | undefined {
+    const resume = this.getResumeById(id, userId);
+    if (!resume) return undefined;
+    Object.assign(resume, { ...updates, updatedAt: new Date().toISOString() });
+    this.save();
+    return resume;
+  }
+
+  deleteResume(id: string, userId: string): boolean {
+    if (!this.data.resumes) this.data.resumes = [];
+    const idx = this.data.resumes.findIndex(r => r.id === id && r.userId === userId);
+    if (idx === -1) return false;
+    this.data.resumes.splice(idx, 1);
+    this.save();
+    return true;
+  }
+
+  // Presentation methods
+  getPresentations(userId: string): PresentationDeck[] {
+    if (!this.data.presentations) this.data.presentations = [];
+    return this.data.presentations
+      .filter(p => p.userId === userId)
+      .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+  }
+
+  getPresentationById(id: string, userId: string): PresentationDeck | undefined {
+    if (!this.data.presentations) this.data.presentations = [];
+    return this.data.presentations.find(p => p.id === id && p.userId === userId);
+  }
+
+  createPresentation(deck: PresentationDeck): PresentationDeck {
+    if (!this.data.presentations) this.data.presentations = [];
+    this.data.presentations.push(deck);
+    this.save();
+    return deck;
+  }
+
+  deletePresentation(id: string, userId: string): boolean {
+    if (!this.data.presentations) this.data.presentations = [];
+    const idx = this.data.presentations.findIndex(p => p.id === id && p.userId === userId);
+    if (idx === -1) return false;
+    this.data.presentations.splice(idx, 1);
+    this.save();
+    return true;
   }
 }
 
